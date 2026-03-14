@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { CheckCircle, Download, Mail, Clock, Copy, AlertCircle, Zap } from "lucide-react";
+import { CheckCircle, Download, Mail, Clock, Copy, AlertCircle, Zap, HelpCircle } from "lucide-react";
 import { toast } from "sonner";
 import InstallationGuide from "@/components/InstallationGuide";
+import SupportModal from "@/components/SupportModal";
 
 /**
  * Success Page: Página de Sucesso após Pagamento
@@ -21,6 +22,7 @@ export default function Success() {
   const [downloadLink, setDownloadLink] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const [countdown, setCountdown] = useState(5);
+  const [supportModalOpen, setSupportModalOpen] = useState(false);
 
   useEffect(() => {
     // Capturar parâmetros da URL
@@ -287,11 +289,14 @@ export default function Success() {
                 📖 Documentação Completa
               </Button>
             </a>
-            <a href="mailto:suporte@funcionariodigital.com">
-              <Button variant="outline" className="w-full border-primary/30 hover:bg-primary/10 h-auto py-3 sm:py-4 text-sm sm:text-base">
-                💬 Contatar Suporte
-              </Button>
-            </a>
+            <Button
+              onClick={() => setSupportModalOpen(true)}
+              variant="outline"
+              className="w-full border-primary/30 hover:bg-primary/10 h-auto py-3 sm:py-4 text-sm sm:text-base gap-2"
+            >
+              <HelpCircle className="w-4 h-4 sm:w-5 sm:h-5" />
+              Reportar Problema
+            </Button>
           </div>
 
           {/* Satisfaction Guarantee */}
@@ -312,6 +317,13 @@ export default function Success() {
           </div>
         </div>
       </div>
+
+      {/* Support Modal */}
+      <SupportModal
+        isOpen={supportModalOpen}
+        onClose={() => setSupportModalOpen(false)}
+        email={paymentData?.email}
+      />
 
       {/* Footer */}
       <footer className="border-t border-border py-6 sm:py-8 bg-card/50 mt-12 sm:mt-16">
