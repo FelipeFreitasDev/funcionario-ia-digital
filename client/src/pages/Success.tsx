@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CheckCircle, Download, Mail, Clock, Copy, AlertCircle, Zap } from "lucide-react";
 import { toast } from "sonner";
+import InstallationGuide from "@/components/InstallationGuide";
 
 /**
  * Success Page: Página de Sucesso após Pagamento
@@ -230,40 +231,65 @@ export default function Success() {
             </div>
           </Card>
 
-          {/* Installation Guide */}
-          <Card className="p-6 sm:p-8 border-border/50 space-y-4">
-            <h3 className="font-bold text-lg sm:text-xl">Próximos Passos</h3>
-            <ol className="space-y-3">
+          {/* Installation Guide - Interactive */}
+          <Card className="p-6 sm:p-8 border-border/50">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-6">Guia de Instalação Interativo</h2>
+            <InstallationGuide />
+          </Card>
+
+          {/* FAQ Section */}
+          <Card className="p-6 sm:p-8 border-border/50 space-y-6">
+            <h2 className="text-2xl sm:text-3xl font-bold">Perguntas Frequentes</h2>
+            <div className="space-y-4">
               {[
-                { step: 1, title: "Baixe o Arquivo", desc: "Clique em 'Baixar Agora' acima" },
-                { step: 2, title: "Extraia o ZIP", desc: "Descompacte em uma pasta de sua escolha" },
-                { step: 3, title: "Execute o Instalador", desc: "Abra o arquivo .exe ou .app" },
-                { step: 4, title: "Siga a Configuração", desc: "O assistente guiará você pelo setup" },
-                { step: 5, title: "Pronto!", desc: "Seu Funcionário Digital está ativo" },
-              ].map((item) => (
-                <li key={item.step} className="flex gap-3 sm:gap-4">
-                  <div className="flex-shrink-0 w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-primary/20 flex items-center justify-center text-xs sm:text-sm font-bold text-primary">
-                    {item.step}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="font-semibold text-sm sm:text-base">{item.title}</p>
-                    <p className="text-xs sm:text-sm text-muted-foreground">{item.desc}</p>
-                  </div>
-                </li>
+                {
+                  q: "Quanto tempo leva para instalar?",
+                  a: "A primeira instalação leva 30-45 minutos (depende da sua conexão). Após isso, é instantâneo.",
+                },
+                {
+                  q: "Preciso de internet para usar?",
+                  a: "Sim, apenas para a instalação inicial. Depois funciona 100% offline.",
+                },
+                {
+                  q: "Posso usar em múltiplos computadores?",
+                  a: "Sim! Sua licença permite instalação em até 3 computadores.",
+                },
+                {
+                  q: "E se der erro na instalação?",
+                  a: "Consulte a seção de Troubleshooting ou entre em contato com suporte.",
+                },
+                {
+                  q: "Posso desinstalar depois?",
+                  a: "Sim, você pode desinstalar a qualquer momento sem perder seus dados.",
+                },
+                {
+                  q: "Qual é o tamanho do arquivo?",
+                  a: "O arquivo tem 2.5 GB. Certifique-se de ter espaço em disco disponível.",
+                },
+              ].map((faq, idx) => (
+                <details key={idx} className="group cursor-pointer">
+                  <summary className="flex items-center gap-3 font-semibold text-sm sm:text-base p-3 rounded-lg hover:bg-card/50 transition">
+                    <span className="text-primary">+</span>
+                    {faq.q}
+                  </summary>
+                  <p className="text-xs sm:text-sm text-muted-foreground mt-2 ml-6 pb-3">
+                    {faq.a}
+                  </p>
+                </details>
               ))}
-            </ol>
+            </div>
           </Card>
 
           {/* Support & Resources */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <a href="https://docs.funcionariodigital.com" target="_blank" rel="noopener noreferrer">
               <Button variant="outline" className="w-full border-primary/30 hover:bg-primary/10 h-auto py-3 sm:py-4 text-sm sm:text-base">
-                📖 Documentação
+                📖 Documentação Completa
               </Button>
             </a>
             <a href="mailto:suporte@funcionariodigital.com">
               <Button variant="outline" className="w-full border-primary/30 hover:bg-primary/10 h-auto py-3 sm:py-4 text-sm sm:text-base">
-                💬 Suporte
+                💬 Contatar Suporte
               </Button>
             </a>
           </div>
