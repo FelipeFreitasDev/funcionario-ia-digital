@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowRight, Zap, Shield, Brain, Cpu, Workflow, BarChart3 } from "lucide-react";
@@ -12,6 +13,10 @@ import { SpecificationModal } from "@/components/SpecificationModal";
  */
 
 export default function Home() {
+  // The userAuth hooks provides authentication state
+  // To implement login/logout functionality, simply call logout() or redirect to getLoginUrl()
+  let { user, loading, error, isAuthenticated, logout } = useAuth();
+
   const [specModalOpen, setSpecModalOpen] = useState(false);
 
   return (

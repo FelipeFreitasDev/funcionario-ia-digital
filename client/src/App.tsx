@@ -9,8 +9,8 @@ import Dashboard from "./pages/Dashboard";
 import Checkout from "./pages/Checkout";
 import Download from "./pages/Download";
 import Success from "./pages/Success";
-
 function Router() {
+  // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
       <Route path="/" component={Home} />
