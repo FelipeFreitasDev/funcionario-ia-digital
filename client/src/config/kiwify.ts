@@ -10,8 +10,8 @@
 
 export const KIWIFY_CONFIG = {
   // Seu link de checkout da Kiwify
-  // Exemplo: https://kiwify.com.br/seu-usuario/seu-produto
-  CHECKOUT_URL: process.env.REACT_APP_KIWIFY_CHECKOUT_URL || "https://kiwify.com.br/seu-link-aqui",
+  // Exemplo: https://pay.kiwify.com.br/nZNq7cL
+  CHECKOUT_URL: process.env.REACT_APP_KIWIFY_CHECKOUT_URL || "https://pay.kiwify.com.br/nZNq7cL",
 
   // Seu ID de produto na Kiwify (obtém no dashboard)
   PRODUCT_ID: process.env.REACT_APP_KIWIFY_PRODUCT_ID || "seu-product-id",
@@ -38,18 +38,13 @@ export const KIWIFY_CONFIG = {
  * @param name - Nome do cliente (opcional)
  */
 export function redirectToKiwifyCheckout(email?: string, name?: string) {
-  let url = KIWIFY_CONFIG.CHECKOUT_URL;
-
-  // Adiciona parâmetros de pré-preenchimento se fornecidos
-  const params = new URLSearchParams();
-  if (email) params.append("email", email);
-  if (name) params.append("name", name);
-
-  if (params.toString()) {
-    url += `?${params.toString()}`;
+  try {
+    let url = KIWIFY_CONFIG.CHECKOUT_URL;
+    window.location.href = url;
+  } catch (error) {
+    console.error("Erro ao redirecionar para Kiwify:", error);
+    alert("Erro ao processar pagamento. Tente novamente.");
   }
-
-  window.location.href = url;
 }
 
 /**
