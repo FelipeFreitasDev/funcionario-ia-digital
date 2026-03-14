@@ -25,14 +25,16 @@ export default function Home() {
             </div>
             <span className="font-bold text-xl">Funcionário Digital</span>
           </div>
-          <div className="flex items-center gap-4">
-            <a href="#features" className="text-sm hover:text-primary transition">Skills</a>
-            <a href="#architecture" className="text-sm hover:text-primary transition">Arquitetura</a>
-            <a href="#roadmap" className="text-sm hover:text-primary transition">Roadmap</a>
-            <Button size="sm" className="bg-primary hover:bg-primary/90 text-background">
-              Começar
-            </Button>
-          </div>
+            <div className="flex items-center gap-4">
+              <a href="#features" className="text-sm hover:text-primary transition">Skills</a>
+              <a href="#architecture" className="text-sm hover:text-primary transition">Arquitetura</a>
+              <a href="#roadmap" className="text-sm hover:text-primary transition">Roadmap</a>
+              <a href="/checkout">
+                <Button size="sm" className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-background font-bold">
+                  🚀 Comprar Agora
+                </Button>
+              </a>
+            </div>
         </div>
       </nav>
 
@@ -57,11 +59,13 @@ export default function Home() {
             </div>
 
             <div className="flex items-center gap-4 pt-4">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-background gap-2" onClick={() => setSpecModalOpen(true)}>
-                Explorar Especificação <ArrowRight className="w-4 h-4" />
-              </Button>
-              <Button size="lg" variant="outline" className="border-primary/30 hover:bg-primary/10">
-                Ver Demo
+              <a href="/checkout" className="flex-1">
+                <Button size="lg" className="w-full bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-background gap-2 font-bold">
+                  🔓 Desbloquear Acesso (R$ 299,90) <ArrowRight className="w-4 h-4" />
+                </Button>
+              </a>
+              <Button size="lg" variant="outline" className="border-primary/30 hover:bg-primary/10" onClick={() => setSpecModalOpen(true)}>
+                Ver Especificação
               </Button>
             </div>
 
@@ -178,9 +182,11 @@ export default function Home() {
                 </p>
               </div>
 
-              <Button className="bg-primary hover:bg-primary/90 text-background gap-2 w-full" onClick={() => setSpecModalOpen(true)}>
-                Ver Especificação Técnica <ArrowRight className="w-4 h-4" />
-              </Button>
+              <a href="/checkout" className="w-full">
+                <Button className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-background gap-2 w-full font-bold">
+                  🔓 Desbloquear Acesso (R$ 299,90) <ArrowRight className="w-4 h-4" />
+                </Button>
+              </a>
             </div>
           </div>
         </div>
@@ -279,9 +285,11 @@ export default function Home() {
               Acesse a especificação técnica completa, com arquitetura detalhada, exemplos de código e roadmap de implementação.
             </p>
             <div className="flex items-center justify-center gap-4">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-background gap-2">
-                Acessar Documentação <ArrowRight className="w-4 h-4" />
-              </Button>
+              <a href="/checkout">
+                <Button size="lg" className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-background gap-2 font-bold">
+                  🚀 Comprar Agora (R$ 299,90) <ArrowRight className="w-4 h-4" />
+                </Button>
+              </a>
               <Button size="lg" variant="outline" className="border-primary/30 hover:bg-primary/10">
                 Contato
               </Button>

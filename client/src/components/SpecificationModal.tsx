@@ -19,6 +19,12 @@ export function SpecificationModal({ open, onOpenChange }: SpecificationModalPro
         </DialogHeader>
 
         <div className="space-y-6 py-4">
+          <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/30 mb-4">
+            <p className="text-sm text-red-500 font-semibold">
+              ⚠️ O código-fonte é propriedade intelectual protegida. Acesso exclusivo ao executável compilado.
+            </p>
+          </div>
+
           <section>
             <h3 className="text-lg font-bold mb-3 text-primary">Stack Tecnológica</h3>
             <div className="grid grid-cols-2 gap-4 text-sm">
@@ -94,9 +100,11 @@ export function SpecificationModal({ open, onOpenChange }: SpecificationModalPro
           <Button variant="outline" onClick={() => onOpenChange(false)}>
             Fechar
           </Button>
-          <Button className="bg-primary hover:bg-primary/90 text-background">
-            Baixar Documentação PDF
-          </Button>
+          <a href="/checkout" className="block">
+            <Button className="bg-primary hover:bg-primary/90 text-background">
+              Desbloquear Acesso (R$ 299,90)
+            </Button>
+          </a>
         </div>
       </DialogContent>
     </Dialog>
