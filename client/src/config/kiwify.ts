@@ -6,21 +6,24 @@
  * 2. Configure seu produto/curso
  * 3. Substitua os valores abaixo com seus dados reais
  * 4. Ative webhooks para verificação de pagamento
+ * 
+ * NOTA: Este arquivo roda no frontend (navegador), então não use process.env
+ * Para variáveis de ambiente, use import.meta.env do Vite
  */
 
 export const KIWIFY_CONFIG = {
   // Seu link de checkout da Kiwify
   // Exemplo: https://pay.kiwify.com.br/nZNq7cL
-  CHECKOUT_URL: process.env.REACT_APP_KIWIFY_CHECKOUT_URL || "https://pay.kiwify.com.br/nZNq7cL",
+  CHECKOUT_URL: "https://pay.kiwify.com.br/nZNq7cL",
 
   // Seu ID de produto na Kiwify (obtém no dashboard)
-  PRODUCT_ID: process.env.REACT_APP_KIWIFY_PRODUCT_ID || "seu-product-id",
+  PRODUCT_ID: "seu-product-id",
 
   // Sua chave de API da Kiwify (para webhooks)
-  API_KEY: process.env.REACT_APP_KIWIFY_API_KEY || "sua-api-key",
+  API_KEY: "sua-api-key",
 
   // URL do seu webhook (será chamado quando pagamento for confirmado)
-  WEBHOOK_URL: process.env.REACT_APP_KIWIFY_WEBHOOK_URL || "https://seu-dominio.com/api/webhooks/kiwify",
+  WEBHOOK_URL: "https://seu-dominio.com/api/webhooks/kiwify",
 
   // Preço do produto em centavos (R$ 299,90 = 29990)
   PRICE_CENTS: 29990,
