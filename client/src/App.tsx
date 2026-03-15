@@ -5,15 +5,18 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
+import Sandbox from "./pages/Sandbox";
 import Dashboard from "./pages/Dashboard";
 import Checkout from "./pages/Checkout";
 import Download from "./pages/Download";
 import Success from "./pages/Success";
+
 function Router() {
   // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/sandbox" component={Sandbox} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/checkout" component={Checkout} />
       <Route path="/download" component={Download} />
