@@ -155,6 +155,103 @@ export async function sendPaymentFailedEmail(
 }
 
 /**
+ * Enviar email de boas-vindas com acesso ao dashboard
+ */
+export async function sendWelcomeEmail(
+  email: string,
+  name: string,
+  dashboardUrl: string
+): Promise<boolean> {
+  try {
+    const html = `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <h2 style="color: #00d9ff;">Bem-vindo ao Funcionário Digital! 🚀</h2>
+        
+        <p>Olá <strong>${name}</strong>,</p>
+        
+        <p>Sua conta foi criada com sucesso! Agora você tem acesso completo ao seu <strong>Funcionário Digital</strong> pessoal.</p>
+        
+        <p style="margin-top: 30px;">
+          <a href="${dashboardUrl}" style="display: inline-block; padding: 12px 24px; background-color: #00d9ff; color: #0a0e27; text-decoration: none; border-radius: 6px; font-weight: bold;">
+            🎯 Acessar Seu Funcionário Digital
+          </a>
+        </p>
+        
+        <p style="margin-top: 30px; color: #666;">
+          <strong>O que você pode fazer agora:</strong>
+        </p>
+        <ul style="color: #666;">
+          <li>✅ Conectar suas redes sociais (Facebook, Instagram, Twitter, etc)</li>
+          <li>✅ Criar e agendar posts automáticos</li>
+          <li>✅ Visualizar analytics em tempo real</li>
+          <li>✅ Usar IA para gerar conteúdo otimizado</li>
+          <li>✅ Gerenciar múltiplas contas de uma vez</li>
+        </ul>
+        
+        <p style="margin-top: 30px; color: #666;">
+          <strong>Primeiros Passos:</strong>
+        </p>
+        <ol style="color: #666;">
+          <li>Acesse seu dashboard clicando no botão acima</li>
+          <li>Clique em "Conectar Rede Social" para adicionar suas contas</li>
+          <li>Crie seu primeiro post usando o editor unificado</li>
+          <li>Agende ou publique imediatamente</li>
+        </ol>
+        
+        <p style="margin-top: 30px; color: #666;">
+          <strong>Precisa de Ajuda?</strong><br>
+          Acesse nossa documentação: <a href="https://docs.funcionariodigital.com">docs.funcionariodigital.com</a><br>
+          Ou envie um email: suporte@funcionariodigital.com<br>
+          Ou abra um ticket de suporte direto no seu dashboard
+        </p>
+        
+        <p style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; color: #999; font-size: 12px;">
+          Este é um email automático. Não responda a este email.<br>
+          © 2026 Funcionário Digital. Todos os direitos reservados.
+        </p>
+      </div>
+    `;
+
+    const text = `
+Bem-vindo ao Funcionário Digital!
+
+Olá ${name},
+
+Sua conta foi criada com sucesso!
+
+Acesse seu dashboard: ${dashboardUrl}
+
+O que você pode fazer agora:
+- Conectar suas redes sociais
+- Criar e agendar posts
+- Visualizar analytics
+- Usar IA para gerar conteúdo
+- Gerenciar múltiplas contas
+
+Primeiros Passos:
+1. Acesse seu dashboard
+2. Conecte suas redes sociais
+3. Crie seu primeiro post
+4. Agende ou publique
+
+Precisa de ajuda? Visite: docs.funcionariodigital.com
+
+© 2026 Funcionário Digital. Todos os direitos reservados.
+    `;
+
+    return await sendEmail({
+      to: email,
+      subject: "Bem-vindo ao Funcionário Digital!",
+      html,
+      text,
+    });
+  } catch (error) {
+    console.error("[Email] Erro ao enviar email de boas-vindas:", error);
+    return false;
+  }
+}
+
+/**
  * Enviar notificação ao proprietário
  */
 export async function sendOwnerNotificationEmail(

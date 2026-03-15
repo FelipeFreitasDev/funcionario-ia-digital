@@ -93,6 +93,28 @@ router.post("/kiwify", async (req: Request, res: Response) => {
       return res.status(500).json({ error: "Erro ao processar compra" });
     }
 
+    // Criar conta de usuário automaticamente se pagamento aprovado
+    if (purchase.status === "approved") {
+      try {
+        // Importar função de criação de conta
+        const { upsertUser } = await import("./db");
+        
+        // Criar ou atualizar usuário
+        await upsertUser({
+          openId: `kiwify-${purchase.transactionId}`,
+          email: purchase.email,
+          name: purchase.name || purchase.email.split("@")[0],
+          loginMethod: "kiwify",
+          role: "user",
+          lastSignedIn: new Date(),
+        });
+        
+        console.log("[Webhook] Conta de usuário criada:", purchase.email);
+      } catch (error) {
+        console.error("[Webhook] Erro ao criar conta de usuário:", error);
+      }
+    }
+
     // Enviar emails baseado no status
     if (purchase.status === "approved") {
       await sendPurchaseConfirmationEmail(

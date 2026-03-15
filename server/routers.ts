@@ -5,6 +5,7 @@ import { publicProcedure, router } from "./_core/trpc";
 import { supportRouter } from "./routers/support";
 import { downloadsRouter } from "./routers/downloads";
 import { socialAuthRouter } from "./routers/socialAuth";
+import { accountsRouter } from "./routers/accounts";
 
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
@@ -22,6 +23,7 @@ export const appRouter = router({
   support: supportRouter,
   downloads: downloadsRouter,
   socialAuth: socialAuthRouter,
+  accounts: accountsRouter,
 
   // TODO: add feature routers here, e.g.
   // todo: router({
