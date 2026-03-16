@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowRight, Zap, Shield, Brain, Cpu, Workflow, BarChart3 } from "lucide-react";
+import { ArrowRight, Zap, Shield, Brain, Cpu, Workflow, BarChart3, Check, X } from "lucide-react";
 import { SpecificationModal } from "@/components/SpecificationModal";
 
 /**
@@ -12,12 +12,121 @@ import { SpecificationModal } from "@/components/SpecificationModal";
  * Layout: Asymmetric sections with diagonal cuts and animated gradients
  */
 
-export default function Home() {
-  // The userAuth hooks provides authentication state
-  // To implement login/logout functionality, simply call logout() or redirect to getLoginUrl()
-  let { user, loading, error, isAuthenticated, logout } = useAuth();
+const PRICING_PLANS = [
+  {
+    name: "Starter",
+    price: 99,
+    description: "Perfeito para iniciantes e pequenas lojas",
+    features: [
+      { text: "1 plataforma e-commerce", included: true },
+      { text: "Todas as 6 redes sociais", included: true },
+      { text: "100 gerações de IA/mês", included: true },
+      { text: "50 publicações agendadas", included: true },
+      { text: "1 conta por rede social", included: true },
+      { text: "Analytics básico", included: true },
+      { text: "Suporte por email", included: true },
+      { text: "Múltiplas contas por rede", included: false },
+      { text: "API customizada", included: false },
+      { text: "Suporte 24/7", included: false },
+    ],
+    cta: "Começar com Starter",
+    highlighted: false,
+    stripeLink: "https://buy.stripe.com/starter", // Você vai substituir com seu link real
+  },
+  {
+    name: "Professional",
+    price: 299,
+    description: "Ideal para agências e médios vendedores",
+    features: [
+      { text: "3 plataformas e-commerce", included: true },
+      { text: "Todas as 6 redes sociais", included: true },
+      { text: "500 gerações de IA/mês", included: true },
+      { text: "200 publicações agendadas", included: true },
+      { text: "3 contas por rede social", included: true },
+      { text: "Analytics avançado", included: true },
+      { text: "Suporte por chat prioritário", included: true },
+      { text: "Múltiplas contas por rede", included: true },
+      { text: "API customizada", included: false },
+      { text: "Suporte 24/7", included: false },
+    ],
+    cta: "Começar com Professional",
+    highlighted: true,
+    stripeLink: "https://buy.stripe.com/professional",
+  },
+  {
+    name: "Enterprise",
+    price: 999,
+    description: "Para grandes agências e operações em escala",
+    features: [
+      { text: "Plataformas e-commerce ilimitadas", included: true },
+      { text: "Todas as 6 redes sociais", included: true },
+      { text: "Gerações de IA ilimitadas", included: true },
+      { text: "Publicações agendadas ilimitadas", included: true },
+      { text: "Contas ilimitadas por rede", included: true },
+      { text: "Analytics em tempo real", included: true },
+      { text: "Suporte 24/7 + Slack dedicado", included: true },
+      { text: "Múltiplas contas por rede", included: true },
+      { text: "API customizada", included: true },
+      { text: "Suporte 24/7", included: true },
+    ],
+    cta: "Contatar para Enterprise",
+    highlighted: false,
+    stripeLink: "https://buy.stripe.com/enterprise",
+  },
+];
 
+const TESTIMONIALS = [
+  {
+    name: "Marina Silva",
+    role: "Proprietária de Loja E-commerce",
+    text: "O Funcionário Digital aumentou minha produtividade em 300%. Agora publico em 3 plataformas simultaneamente sem esforço.",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Marina",
+  },
+  {
+    name: "Carlos Mendes",
+    role: "Gerente de Marketing Digital",
+    text: "Economizei R$ 5.000/mês em agência. O sistema faz o trabalho de 2 pessoas sozinho.",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Carlos",
+  },
+  {
+    name: "Ana Costa",
+    role: "Empreendedora Digital",
+    text: "Finalmente tenho tempo para estratégia enquanto o Funcionário Digital cuida da execução.",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Ana",
+  },
+];
+
+const FAQ = [
+  {
+    question: "Posso testar antes de pagar?",
+    answer: "Sim! Oferecemos 7 dias de teste gratuito com acesso completo ao plano Starter.",
+  },
+  {
+    question: "Posso cancelar a qualquer momento?",
+    answer: "Claro! Você pode cancelar sua assinatura a qualquer momento, sem multa ou compromisso.",
+  },
+  {
+    question: "Qual é a diferença entre os planos?",
+    answer: "A principal diferença é o número de plataformas e-commerce conectadas, gerações de IA/mês e contas por rede social. Todos os planos incluem acesso a todas as 6 redes sociais.",
+  },
+  {
+    question: "Vocês oferecem suporte?",
+    answer: "Sim! Starter tem suporte por email, Professional tem chat prioritário, e Enterprise tem suporte 24/7 com Slack dedicado.",
+  },
+  {
+    question: "Posso fazer upgrade ou downgrade?",
+    answer: "Sim! Você pode mudar de plano a qualquer momento. A mudança é processada imediatamente.",
+  },
+  {
+    question: "Quais plataformas de e-commerce são suportadas?",
+    answer: "Shopee, Mercado Livre, Amazon, Loja Integrada, WooCommerce e mais. Enterprise suporta integrações customizadas.",
+  },
+];
+
+export default function Home() {
+  const { user, loading, isAuthenticated } = useAuth();
   const [specModalOpen, setSpecModalOpen] = useState(false);
+  const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
@@ -30,43 +139,49 @@ export default function Home() {
             </div>
             <span className="font-bold text-xl">Funcionário Digital</span>
           </div>
-            <div className="flex items-center gap-4">
-              <a href="#features" className="text-sm hover:text-primary transition">Skills</a>
-              <a href="#architecture" className="text-sm hover:text-primary transition">Arquitetura</a>
-              <a href="#roadmap" className="text-sm hover:text-primary transition">Roadmap</a>
-              <a href="/checkout">
+          <div className="flex items-center gap-4">
+            <a href="#features" className="text-sm hover:text-primary transition">Skills</a>
+            <a href="#pricing" className="text-sm hover:text-primary transition">Planos</a>
+            <a href="#faq" className="text-sm hover:text-primary transition">FAQ</a>
+            {isAuthenticated ? (
+              <a href="/dashboard">
                 <Button size="sm" className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-background font-bold">
-                  🚀 Comprar Agora
+                  Dashboard
                 </Button>
               </a>
-            </div>
+            ) : (
+              <a href="#pricing">
+                <Button size="sm" className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-background font-bold">
+                  🚀 Começar Agora
+                </Button>
+              </a>
+            )}
+          </div>
         </div>
       </nav>
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 overflow-hidden">
-        {/* Animated gradient background */}
         <div className="absolute inset-0 -z-10">
           <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-primary/20 to-transparent rounded-full blur-3xl animate-pulse"></div>
           <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-secondary/20 to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }}></div>
         </div>
 
         <div className="container grid grid-cols-2 gap-12 items-center">
-          {/* Left: Text Content */}
           <div className="space-y-6">
             <div className="space-y-3">
               <h1 className="text-5xl font-bold leading-tight">
                 Seu <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Funcionário Digital</span> Autônomo
               </h1>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Uma IA 100% offline, sem custos recorrentes, que aprende com você e executa desde tarefas administrativas até operações complexas de e-commerce, marketing e desenvolvimento web.
+                Uma IA inteligente que trabalha 24h automatizando e-commerce, marketing digital e redes sociais. Sem limites de uso, sem custos ocultos.
               </p>
             </div>
 
             <div className="flex items-center gap-4 pt-4">
-              <a href="/checkout" className="flex-1">
+              <a href="#pricing" className="flex-1">
                 <Button size="lg" className="w-full bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-background gap-2 font-bold">
-                  🔓 Desbloquear Acesso (R$ 299,90) <ArrowRight className="w-4 h-4" />
+                  🚀 Ver Planos <ArrowRight className="w-4 h-4" />
                 </Button>
               </a>
               <Button size="lg" variant="outline" className="border-primary/30 hover:bg-primary/10" onClick={() => setSpecModalOpen(true)}>
@@ -74,24 +189,22 @@ export default function Home() {
               </Button>
             </div>
 
-            {/* Key Stats */}
             <div className="grid grid-cols-3 gap-4 pt-8 border-t border-border">
               <div>
-                <div className="text-2xl font-bold text-primary">100%</div>
-                <div className="text-sm text-muted-foreground">Offline</div>
+                <div className="text-2xl font-bold text-primary">24/7</div>
+                <div className="text-sm text-muted-foreground">Trabalho Autônomo</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-secondary">$0</div>
-                <div className="text-sm text-muted-foreground">Custos Recorrentes</div>
+                <div className="text-2xl font-bold text-secondary">3</div>
+                <div className="text-sm text-muted-foreground">Planos Flexíveis</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-primary">∞</div>
-                <div className="text-sm text-muted-foreground">Sem Limites</div>
+                <div className="text-2xl font-bold text-primary">6</div>
+                <div className="text-sm text-muted-foreground">Redes Sociais</div>
               </div>
             </div>
           </div>
 
-          {/* Right: Hero Image */}
           <div className="relative h-96 rounded-2xl overflow-hidden border border-border/50">
             <img
               src="https://d2xsxph8kpxj0f.cloudfront.net/310519663438547756/SdYSRiFyv5LnWNYthZFfV8/hero-ai-assistant-jyDJu77L7DwuAzc7BbznmA.webp"
@@ -105,7 +218,6 @@ export default function Home() {
 
       {/* Features Section */}
       <section id="features" className="py-20 border-t border-border relative overflow-hidden">
-        {/* Diagonal cut SVG */}
         <svg className="absolute top-0 left-0 w-full h-24 -mt-1" viewBox="0 0 1200 100" preserveAspectRatio="none">
           <polygon points="0,0 1200,0 1200,100 0,50" fill="#1a1f3a" opacity="0.5" />
         </svg>
@@ -118,15 +230,14 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Skills Grid */}
           <div className="grid grid-cols-2 gap-6">
             {[
-              { icon: Cpu, title: "Administração", desc: "E-mail, calendário, documentos, transcrição e tarefas" },
-              { icon: Zap, title: "Marketing Digital", desc: "Redes sociais, SEO, campanhas e análise de métricas" },
-              { icon: BarChart3, title: "E-commerce", desc: "Pesquisa de produtos, análise de nicho e precificação" },
-              { icon: Brain, title: "Desenvolvimento", desc: "Geração de código, landing pages e deploy automático" },
-              { icon: Workflow, title: "Criação de Conteúdo", desc: "Textos, imagens, vídeos e podcasts" },
-              { icon: Shield, title: "Pesquisa & Inteligência", desc: "Web scraping, análise de dados e monitoramento" },
+              { icon: Cpu, title: "E-commerce", desc: "Pesquisa de produtos, análise de nicho, precificação e publicação automática" },
+              { icon: Zap, title: "Marketing Digital", desc: "Redes sociais, SEO, campanhas e análise de métricas em tempo real" },
+              { icon: BarChart3, title: "Analytics", desc: "Dashboard de vendas, ROI por plataforma e tendências de mercado" },
+              { icon: Brain, title: "Criação de Conteúdo", desc: "Geração de imagens, vídeos e textos com IA" },
+              { icon: Workflow, title: "Automação", desc: "Agendamento, sincronização e publicação em múltiplas plataformas" },
+              { icon: Shield, title: "Segurança", desc: "Isolamento de dados por usuário, criptografia e auditoria completa" },
             ].map((skill, idx) => (
               <Card key={idx} className="p-6 border-border/50 hover:border-primary/50 transition-all group cursor-pointer">
                 <div className="flex items-start gap-4">
@@ -144,136 +255,122 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Architecture Section */}
-      <section id="architecture" className="py-20 border-t border-border">
+      {/* Pricing Section */}
+      <section id="pricing" className="py-20 border-t border-border relative overflow-hidden">
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+        </div>
+
         <div className="container">
-          <div className="space-y-4 mb-16">
-            <h2 className="text-4xl font-bold">Arquitetura Inteligente</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl">
-              Sistema modular com orquestração autônoma, memória de longo prazo e personalização profunda.
+          <div className="space-y-4 mb-16 text-center">
+            <h2 className="text-4xl font-bold">Planos Simples e Transparentes</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Escolha o plano perfeito para seu negócio. Sem cobranças ocultas, cancele quando quiser.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-12 items-center">
-            {/* Architecture Image */}
-            <div className="relative h-96 rounded-2xl overflow-hidden border border-border/50">
-              <img
-                src="https://d2xsxph8kpxj0f.cloudfront.net/310519663438547756/SdYSRiFyv5LnWNYthZFfV8/automation-flow-VK3FesSSau8wsSFGStV3zF.webp"
-                alt="Architecture"
-                className="w-full h-full object-cover"
-              />
-            </div>
+          <div className="grid grid-cols-3 gap-8">
+            {PRICING_PLANS.map((plan, idx) => (
+              <Card
+                key={idx}
+                className={`relative p-8 transition-all ${
+                  plan.highlighted
+                    ? "border-primary/50 shadow-lg shadow-primary/20 scale-105"
+                    : "border-border/50 hover:border-primary/30"
+                }`}
+              >
+                {plan.highlighted && (
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                    <span className="bg-gradient-to-r from-primary to-secondary text-background text-xs font-bold px-4 py-1 rounded-full">
+                      MAIS POPULAR
+                    </span>
+                  </div>
+                )}
 
-            {/* Architecture Details */}
-            <div className="space-y-6">
-              <div className="space-y-3">
-                <h3 className="text-2xl font-bold">Orquestração Autônoma</h3>
-                <p className="text-muted-foreground">
-                  O assistente decompõe objetivos complexos em subtarefas, executa de forma paralela e valida cada etapa antes de prosseguir.
-                </p>
-              </div>
+                <div className="space-y-6">
+                  <div>
+                    <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
+                    <p className="text-sm text-muted-foreground">{plan.description}</p>
+                  </div>
 
-              <div className="space-y-3">
-                <h3 className="text-2xl font-bold">Memória de Longo Prazo</h3>
-                <p className="text-muted-foreground">
-                  ChromaDB + SQLite armazenam preferências, histórico e padrões de uso, permitindo aprendizado contínuo.
-                </p>
-              </div>
+                  <div className="space-y-2">
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-4xl font-bold">R$ {plan.price}</span>
+                      <span className="text-muted-foreground">/mês</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground">Faturamento mensal. Cancele a qualquer momento.</p>
+                  </div>
 
-              <div className="space-y-3">
-                <h3 className="text-2xl font-bold">Personalização Profunda</h3>
-                <p className="text-muted-foreground">
-                  Sistema de perfis (Trabalho, Pessoal, Criativo) que se adapta ao seu estilo de comunicação e preferências.
-                </p>
-              </div>
+                  <a href={plan.stripeLink} target="_blank" rel="noopener noreferrer" className="w-full">
+                    <Button
+                      size="lg"
+                      className={`w-full font-bold ${
+                        plan.highlighted
+                          ? "bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-background"
+                          : "border border-primary/30 hover:bg-primary/10"
+                      }`}
+                      variant={plan.highlighted ? "default" : "outline"}
+                    >
+                      {plan.cta}
+                    </Button>
+                  </a>
 
-              <a href="/checkout" className="w-full">
-                <Button className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-background gap-2 w-full font-bold">
-                  🔓 Desbloquear Acesso (R$ 299,90) <ArrowRight className="w-4 h-4" />
-                </Button>
-              </a>
-            </div>
+                  <div className="space-y-3 pt-6 border-t border-border">
+                    {plan.features.map((feature, fidx) => (
+                      <div key={fidx} className="flex items-start gap-3">
+                        {feature.included ? (
+                          <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                        ) : (
+                          <X className="w-5 h-5 text-muted-foreground/50 flex-shrink-0 mt-0.5" />
+                        )}
+                        <span className={feature.included ? "text-sm" : "text-sm text-muted-foreground/50"}>
+                          {feature.text}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+
+          <div className="mt-12 p-6 bg-primary/5 border border-primary/20 rounded-lg text-center">
+            <p className="text-muted-foreground mb-4">
+              Precisa de uma solução customizada? Entre em contato conosco para um plano Enterprise personalizado.
+            </p>
+            <Button variant="outline" className="border-primary/30 hover:bg-primary/10">
+              Falar com Vendas
+            </Button>
           </div>
         </div>
       </section>
 
-      {/* Security Section */}
-      <section className="py-20 border-t border-border relative overflow-hidden">
-        <svg className="absolute bottom-0 left-0 w-full h-24 -mb-1" viewBox="0 0 1200 100" preserveAspectRatio="none">
-          <polygon points="0,50 1200,100 1200,100 0,0" fill="#1a1f3a" opacity="0.5" />
-        </svg>
-
+      {/* Testimonials Section */}
+      <section className="py-20 border-t border-border">
         <div className="container">
-          <div className="grid grid-cols-2 gap-12 items-center">
-            {/* Security Image */}
-            <div className="relative h-96 rounded-2xl overflow-hidden border border-border/50">
-              <img
-                src="https://d2xsxph8kpxj0f.cloudfront.net/310519663438547756/SdYSRiFyv5LnWNYthZFfV8/offline-security-dPivbUtxigBeSvHuk7UDM6.webp"
-                alt="Security"
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            {/* Security Details */}
-            <div className="space-y-6">
-              <div className="space-y-3">
-                <h2 className="text-4xl font-bold">Privacidade & Segurança</h2>
-                <p className="text-lg text-muted-foreground">
-                  Design "Offline-First" garante que seus dados nunca deixem seu computador.
-                </p>
-              </div>
-
-              <div className="space-y-4">
-                <div className="flex items-start gap-4">
-                  <Shield className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
-                  <div>
-                    <h4 className="font-semibold mb-1">Criptografia AES-256</h4>
-                    <p className="text-sm text-muted-foreground">Dados sensíveis protegidos em vault local</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <Shield className="w-6 h-6 text-secondary flex-shrink-0 mt-1" />
-                  <div>
-                    <h4 className="font-semibold mb-1">Isolamento de Processos</h4>
-                    <p className="text-sm text-muted-foreground">Automação web em ambientes Docker controlados</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <Shield className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
-                  <div>
-                    <h4 className="font-semibold mb-1">Auditoria Completa</h4>
-                    <p className="text-sm text-muted-foreground">Registro de todas as interações para rastreabilidade</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Roadmap Section */}
-      <section id="roadmap" className="py-20 border-t border-border">
-        <div className="container">
-          <div className="space-y-4 mb-16">
-            <h2 className="text-4xl font-bold">Roadmap de Desenvolvimento</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl">
-              Desenvolvimento estruturado em 4 fases, do MVP funcional ao sistema avançado completo.
+          <div className="space-y-4 mb-16 text-center">
+            <h2 className="text-4xl font-bold">O que Nossos Clientes Dizem</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Veja como o Funcionário Digital transformou negócios reais.
             </p>
           </div>
 
-          <div className="grid grid-cols-4 gap-4">
-            {[
-              { phase: "Fase 1", title: "MVP Funcional", duration: "4-6 sem", color: "from-primary" },
-              { phase: "Fase 2", title: "Skills Produtividade", duration: "6-8 sem", color: "from-primary to-secondary" },
-              { phase: "Fase 3", title: "Agente Autônomo", duration: "8-10 sem", color: "from-secondary" },
-              { phase: "Fase 4", title: "Personalização", duration: "4-6 sem", color: "from-secondary to-primary" },
-            ].map((item, idx) => (
-              <Card key={idx} className="p-6 border-border/50 relative overflow-hidden group hover:border-primary/50 transition-all">
-                <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-5 group-hover:opacity-10 transition-all`}></div>
-                <div className="relative">
-                  <div className="text-sm font-semibold text-primary mb-2">{item.phase}</div>
-                  <h3 className="text-lg font-bold mb-3">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground">{item.duration}</p>
+          <div className="grid grid-cols-3 gap-8">
+            {TESTIMONIALS.map((testimonial, idx) => (
+              <Card key={idx} className="p-6 border-border/50 hover:border-primary/30 transition-all">
+                <div className="space-y-4">
+                  <p className="text-muted-foreground italic">"{testimonial.text}"</p>
+                  <div className="flex items-center gap-4 pt-4 border-t border-border">
+                    <img
+                      src={testimonial.avatar}
+                      alt={testimonial.name}
+                      className="w-12 h-12 rounded-full"
+                    />
+                    <div>
+                      <p className="font-semibold">{testimonial.name}</p>
+                      <p className="text-xs text-muted-foreground">{testimonial.role}</p>
+                    </div>
+                  </div>
                 </div>
               </Card>
             ))}
@@ -281,73 +378,72 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 border-t border-border">
-        <div className="container">
-          <div className="bg-gradient-to-r from-primary/10 to-secondary/10 border border-primary/20 rounded-2xl p-12 text-center space-y-6">
-            <h2 className="text-4xl font-bold">Pronto para Começar?</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Acesse a especificação técnica completa, com arquitetura detalhada, exemplos de código e roadmap de implementação.
+      {/* FAQ Section */}
+      <section id="faq" className="py-20 border-t border-border">
+        <div className="container max-w-3xl">
+          <div className="space-y-4 mb-16 text-center">
+            <h2 className="text-4xl font-bold">Perguntas Frequentes</h2>
+            <p className="text-lg text-muted-foreground">
+              Respostas para as dúvidas mais comuns sobre o Funcionário Digital.
             </p>
-            <div className="flex items-center justify-center gap-4">
-              <a href="/checkout">
-                <Button size="lg" className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-background gap-2 font-bold">
-                  🚀 Comprar Agora (R$ 299,90) <ArrowRight className="w-4 h-4" />
-                </Button>
-              </a>
-              <Button size="lg" variant="outline" className="border-primary/30 hover:bg-primary/10">
-                Contato
+          </div>
+
+          <div className="space-y-4">
+            {FAQ.map((item, idx) => (
+              <Card
+                key={idx}
+                className="p-6 border-border/50 cursor-pointer hover:border-primary/30 transition-all"
+                onClick={() => setExpandedFaq(expandedFaq === idx ? null : idx)}
+              >
+                <div className="flex items-center justify-between">
+                  <h3 className="font-semibold text-lg">{item.question}</h3>
+                  <span className={`text-primary transition-transform ${expandedFaq === idx ? "rotate-180" : ""}`}>
+                    ▼
+                  </span>
+                </div>
+                {expandedFaq === idx && (
+                  <p className="text-muted-foreground mt-4">{item.answer}</p>
+                )}
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Final Section */}
+      <section className="py-20 border-t border-border relative overflow-hidden">
+        <svg className="absolute bottom-0 left-0 w-full h-24 -mb-1" viewBox="0 0 1200 100" preserveAspectRatio="none">
+          <polygon points="0,50 1200,100 1200,100 0,0" fill="#1a1f3a" opacity="0.5" />
+        </svg>
+
+        <div className="container text-center space-y-8">
+          <div className="space-y-4">
+            <h2 className="text-4xl font-bold">Pronto para Transformar Seu Negócio?</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Comece agora com o Funcionário Digital. Teste grátis por 7 dias, sem cartão de crédito.
+            </p>
+          </div>
+
+          <div className="flex items-center justify-center gap-4">
+            <a href="#pricing">
+              <Button size="lg" className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-background gap-2 font-bold">
+                🚀 Começar Agora <ArrowRight className="w-4 h-4" />
               </Button>
-            </div>
+            </a>
+            <Button size="lg" variant="outline" className="border-primary/30 hover:bg-primary/10">
+              Agendar Demo
+            </Button>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border py-12 bg-card/50">
-        <div className="container">
-          <div className="grid grid-cols-4 gap-8 mb-8">
-            <div>
-              <h4 className="font-semibold mb-4">Produto</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="#" className="hover:text-foreground transition">Features</a></li>
-                <li><a href="#" className="hover:text-foreground transition">Pricing</a></li>
-                <li><a href="#" className="hover:text-foreground transition">Roadmap</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Documentação</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="#" className="hover:text-foreground transition">Guia de Início</a></li>
-                <li><a href="#" className="hover:text-foreground transition">API Docs</a></li>
-                <li><a href="#" className="hover:text-foreground transition">FAQ</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Comunidade</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="#" className="hover:text-foreground transition">Discord</a></li>
-                <li><a href="#" className="hover:text-foreground transition">GitHub</a></li>
-                <li><a href="#" className="hover:text-foreground transition">Twitter</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Legal</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="#" className="hover:text-foreground transition">Privacidade</a></li>
-                <li><a href="#" className="hover:text-foreground transition">Termos</a></li>
-                <li><a href="#" className="hover:text-foreground transition">Cookies</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-border pt-8 flex items-center justify-between text-sm text-muted-foreground">
-            <p>&copy; 2026 Funcionário Digital. Todos os direitos reservados.</p>
-            <p>Desenvolvido com IA e ❤️</p>
-          </div>
+      <footer className="py-8 border-t border-border">
+        <div className="container text-center text-sm text-muted-foreground">
+          <p>© 2026 Funcionário Digital. Todos os direitos reservados.</p>
         </div>
       </footer>
 
-      {/* Specification Modal */}
       <SpecificationModal open={specModalOpen} onOpenChange={setSpecModalOpen} />
     </div>
   );
