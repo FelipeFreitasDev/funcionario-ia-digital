@@ -30,6 +30,13 @@
 - [ ] Criar webhook para notificações de novos pedidos
 - [ ] Testar fluxo completo de publicação e venda
 
+## ⏳ FASE 3A-PLUS: USAR APENAS AIs GRATUITAS
+- [x] Remover dependências de APIs pagas
+- [x] Manter apenas Hugging Face (100% gratuito)
+- [x] Manter modelos open-source (Stable Diffusion, etc)
+- [ ] Implementar cache para reduzir requisições
+- [ ] Testar com modelos gratuitos
+
 ## ✅ FASE 3B: CREATIVE STUDIO - MÚLTIPLAS AIs GRATUITAS
 - [x] Integrar Stability AI (geração de imagens - free tier)
 - [x] Integrar DALL-E 3 (geração de imagens - free credits)
@@ -68,6 +75,17 @@
 - [x] Implementar geração de posts para redes sociais
 - [x] Implementar gerador de mockups de produtos
 - [x] Implementar gerador de thumbnails para vídeos
+
+## ✅ FASE 3E: OTIMIZAÇÃO COM CACHE E UI (IMPLEMENTADO)
+- [x] Implementar cache em memória para imagens geradas
+- [x] Criar helper de cache com TTL configurável
+- [x] Integrar cache ao router creative
+- [x] Criar UI do Frontend para Creative Studio
+- [x] Implementar seletor de estilo e qualidade
+- [x] Adicionar preview de imagens geradas
+- [x] Implementar galeria de imagens cacheadas
+- [x] Criar 12 testes unitários para cache
+- [x] Adicionar rota /creative-studio-ui no App.tsx
 
 ## ⏳ FASE 4: CRIAÇÃO DE CRIATIVOS (LEGACY)
 - [ ] Gerador de imagens com IA

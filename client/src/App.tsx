@@ -5,7 +5,7 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
-import Sandbox from "./pages/Sandbox";
+import CreativeStudioUI from "./pages/CreativeStudioUI";
 import Dashboard from "./pages/Dashboard";
 import Checkout from "./pages/Checkout";
 import Download from "./pages/Download";
@@ -20,7 +20,6 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
-      <Route path="/sandbox" component={Sandbox} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/checkout" component={Checkout} />
       <Route path="/download" component={Download} />
@@ -28,6 +27,7 @@ function Router() {
       <Route path="/pinterest" component={PinterestIntegration} />
       <Route path="/ecommerce" component={EcommerceHub} />
       <Route path="/creative-studio" component={CreativeStudio} />
+      <Route path="/creative-studio-ui" component={CreativeStudioUI} />
       <Route path="/online-store" component={OnlineStore} />
       <Route path="/404" component={NotFound} />
       {/* Final fallback route */}

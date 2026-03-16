@@ -7,6 +7,11 @@ import {
   type ImageGenerationOptions,
 } from "../_core/aiImageGeneration";
 import {
+  getCachedImage,
+  cacheImageResult,
+  imageCache,
+} from "../_core/cache";
+import {
   generateVideoWithAI,
   getAvailableVideoProviders,
   type VideoProvider,
@@ -18,7 +23,7 @@ import {
  */
 export const creativeRouter = router({
   /**
-   * Gerar imagem com IA
+   * Gerar imagem com IA (com cache integrado)
    */
   generateImage: publicProcedure
     .input(
@@ -41,10 +46,29 @@ export const creativeRouter = router({
         height: z.number().default(768),
         quality: z.enum(["standard", "high", "ultra"]).default("high"),
         negativePrompt: z.string().optional(),
+        useCache: z.boolean().default(true),
       })
     )
     .mutation(async ({ input }) => {
       try {
+        // Verificar cache se habilitado
+        if (input.useCache) {
+          const cached = getCachedImage(
+            input.prompt,
+            input.style,
+            input.width,
+            input.height,
+            input.provider
+          );
+          if (cached) {
+            return {
+              success: true,
+              ...cached,
+              fromCache: true,
+            };
+          }
+        }
+
         const options: ImageGenerationOptions = {
           prompt: input.prompt,
           style: input.style,
@@ -57,9 +81,23 @@ export const creativeRouter = router({
 
         const result = await generateImageWithAI(options);
 
+        // Armazenar em cache se sucesso
+        if (result && input.useCache) {
+          cacheImageResult(
+            input.prompt,
+            input.style,
+            input.width,
+            input.height,
+            input.provider,
+            result,
+            3600 // 1 hora de TTL
+          );
+        }
+
         return {
           success: true,
           ...result,
+          fromCache: false,
         };
       } catch (error) {
         console.error("Image generation error:", error);
@@ -129,6 +167,21 @@ export const creativeRouter = router({
    */
   getAvailableVideoProviders: publicProcedure.query(() => {
     return getAvailableVideoProviders();
+  }),
+
+  /**
+   * Obter estatísticas do cache
+   */
+  getCacheStats: publicProcedure.query(() => {
+    return imageCache.getStats();
+  }),
+
+  /**
+   * Limpar cache
+   */
+  clearCache: publicProcedure.mutation(() => {
+    imageCache.clear();
+    return { success: true, message: "Cache limpo com sucesso" };
   }),
 
   /**
