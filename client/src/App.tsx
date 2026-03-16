@@ -22,6 +22,7 @@ import OnlineStore from "./pages/OnlineStore";
 import WorkerControl from "./pages/WorkerControl";
 import Onboarding from "./pages/Onboarding";
 import MultiTenantDashboard from "./pages/MultiTenantDashboard";
+import Settings from "./pages/Settings";
 
 function RouterWithNotifications() {
   const { recommendations, dismissRecommendation } = useWorker();
@@ -52,6 +53,7 @@ function RouterWithNotifications() {
         <Route path="/worker-control" component={WorkerControl} />
         <Route path="/onboarding" component={Onboarding} />
         <Route path="/multi-tenant-dashboard" component={MultiTenantDashboard} />
+        <Route path="/settings" component={Settings} />
         <Route path="/404" component={NotFound} />
         {/* Final fallback route */}
         <Route component={NotFound} />
