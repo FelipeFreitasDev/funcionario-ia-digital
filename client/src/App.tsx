@@ -1,4 +1,3 @@
-import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
@@ -8,7 +7,6 @@ import { useState } from "react";
 import { useWorker } from "@/hooks/useWorker";
 import { RecommendationNotificationQueue } from "@/components/RecommendationNotification";
 import Home from "./pages/Home";
-import CreativeStudioUI from "@/pages/CreativeStudioUI";
 import AnalyticsDashboard from "@/pages/AnalyticsDashboard";
 import Dashboard from "./pages/Dashboard";
 import Checkout from "./pages/Checkout";
@@ -16,8 +14,9 @@ import Download from "./pages/Download";
 import Success from "./pages/Success";
 import PinterestIntegration from "./pages/PinterestIntegration";
 import EcommerceHub from "./pages/EcommerceHub";
-import CreativeStudio from "./pages/CreativeStudio";
-import CreativeStudioTest from "./pages/CreativeStudioTest";
+import CreativeStudioTest from "@/pages/CreativeStudioTest";
+import CreativeStudioUI from "@/pages/CreativeStudioUI";
+import CheckoutSuccess from "@/pages/CheckoutSuccess";
 import OnlineStore from "./pages/OnlineStore";
 import WorkerControl from "./pages/WorkerControl";
 import Onboarding from "./pages/Onboarding";
@@ -45,10 +44,10 @@ function RouterWithNotifications() {
         <Route path="/success" component={Success} />
         <Route path="/pinterest" component={PinterestIntegration} />
         <Route path="/ecommerce" component={EcommerceHub} />
-        <Route path="/creative-studio" component={CreativeStudio} />
-        <Route path="/creative-studio-ui" component={CreativeStudioUI} />
         <Route path="/analytics" component={AnalyticsDashboard} />
         <Route path="/creative-studio-test" component={CreativeStudioTest} />
+        <Route path="/creative-studio-ui" component={CreativeStudioUI} />
+        <Route path="/checkout-success" component={CheckoutSuccess} />
         <Route path="/online-store" component={OnlineStore} />
         <Route path="/worker-control" component={WorkerControl} />
         <Route path="/onboarding" component={Onboarding} />
@@ -59,7 +58,7 @@ function RouterWithNotifications() {
         <Route component={NotFound} />
       </Switch>
 
-      {/* Notification Queue - Não bloqueia o trabalho */}
+      {/* Recommendation Notifications */}
       <RecommendationNotificationQueue
         recommendations={visibleRecs}
         onDismiss={handleDismiss}
@@ -68,25 +67,14 @@ function RouterWithNotifications() {
   );
 }
 
-// NOTE: About Theme
-// - First choose a default theme according to your design style (dark or light bg), than change color palette in index.css
-//   to keep consistent foreground/background color across components
-// - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
-
-function App() {
+export default function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider
-        defaultTheme="light"
-        // switchable
-      >
+      <ThemeProvider>
         <TooltipProvider>
-          <Toaster />
           <RouterWithNotifications />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
   );
 }
-
-export default App;

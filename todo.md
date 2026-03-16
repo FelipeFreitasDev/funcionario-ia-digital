@@ -363,3 +363,14 @@
 - [x] Otimizar para mobile responsivo
 - [x] Adicionar navegação para seções (Skills, Planos, FAQ)
 - [x] Implementar smooth scroll para âncoras
+
+
+## ✅ FASE 21: FLUXO DE CHECKOUT SEM LOGIN OBRIGATÓRIO (IMPLEMENTADO)
+- [x] Remover requisito de login da landing page
+- [x] Criar página de sucesso pós-pagamento (/checkout-success)
+- [x] Implementar fluxo: visitante → compra → Stripe → sucesso → cadastro
+- [x] Adicionar 3 passos de onboarding na página de sucesso
+- [x] Integrar com autenticação existente
+- [x] Adicionar rota /checkout-success ao App.tsx
+- [x] Implementar redirecionamento automático para onboarding se autenticado
+- [x] Testar fluxo completo
