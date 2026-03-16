@@ -10,6 +10,8 @@ import Dashboard from "./pages/Dashboard";
 import Checkout from "./pages/Checkout";
 import Download from "./pages/Download";
 import Success from "./pages/Success";
+import PinterestIntegration from "./pages/PinterestIntegration";
+import EcommerceHub from "./pages/EcommerceHub";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -21,6 +23,8 @@ function Router() {
       <Route path="/checkout" component={Checkout} />
       <Route path="/download" component={Download} />
       <Route path="/success" component={Success} />
+      <Route path="/pinterest" component={PinterestIntegration} />
+      <Route path="/ecommerce" component={EcommerceHub} />
       <Route path="/404" component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
