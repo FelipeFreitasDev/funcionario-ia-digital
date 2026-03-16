@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Link } from "wouter";
 import {
   Facebook,
   Instagram,
@@ -19,6 +20,9 @@ import {
   Zap,
   BarChart3,
   LogOut,
+  Palette,
+  Store,
+  ShoppingCart,
 } from "lucide-react";
 
 interface SocialAccount {
@@ -45,7 +49,7 @@ interface Post {
 
 export default function Dashboard() {
   const { user, logout, loading } = useAuth();
-  const [activeTab, setActiveTab] = useState<"overview" | "posts" | "schedule" | "analytics">("overview");
+  const [activeTab, setActiveTab] = useState<"overview" | "posts" | "schedule" | "analytics" | "tools">("overview");
   const [socialAccounts] = useState<SocialAccount[]>([
     {
       id: "1",
@@ -158,12 +162,13 @@ export default function Dashboard() {
       {/* Main Content */}
       <div className="max-w-7xl mx-auto p-6">
         {/* Tabs */}
-        <div className="flex gap-2 mb-6 bg-slate-800/50 p-2 rounded-lg w-fit">
+        <div className="flex gap-2 mb-6 bg-slate-800/50 p-2 rounded-lg overflow-x-auto">
           {[
             { id: "overview", label: "Visão Geral", icon: Eye },
             { id: "posts", label: "Criar Post", icon: Plus },
             { id: "schedule", label: "Agendador", icon: Calendar },
             { id: "analytics", label: "Analytics", icon: BarChart3 },
+            { id: "tools", label: "Ferramentas", icon: Settings },
           ].map((tab) => {
             const Icon = tab.icon;
             return (
@@ -389,6 +394,62 @@ export default function Dashboard() {
                   ))}
               </div>
             </Card>
+          </div>
+        )}
+
+        {/* Tools Tab */}
+        {activeTab === "tools" && (
+          <div className="space-y-6">
+            <h2 className="text-2xl font-bold text-white">Ferramentas Disponíveis</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {/* E-commerce Hub */}
+              <Link href="/ecommerce">
+                <Card className="bg-gradient-to-br from-slate-800 to-slate-700 border-slate-600 p-6 hover:border-blue-500 transition cursor-pointer h-full">
+                  <div className="flex items-center gap-3 mb-3">
+                    <ShoppingCart className="w-8 h-8 text-blue-400" />
+                    <h3 className="text-xl font-bold text-white">E-commerce Hub</h3>
+                  </div>
+                  <p className="text-slate-400 text-sm mb-4">
+                    Pesquise produtos campeoes, publique em multiplas plataformas e acompanhe suas vendas em tempo real.
+                  </p>
+                  <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white text-sm">
+                    Acessar
+                  </Button>
+                </Card>
+              </Link>
+
+              {/* Creative Studio */}
+              <Link href="/creative-studio">
+                <Card className="bg-gradient-to-br from-slate-800 to-slate-700 border-slate-600 p-6 hover:border-purple-500 transition cursor-pointer h-full">
+                  <div className="flex items-center gap-3 mb-3">
+                    <Palette className="w-8 h-8 text-purple-400" />
+                    <h3 className="text-xl font-bold text-white">Creative Studio</h3>
+                  </div>
+                  <p className="text-slate-400 text-sm mb-4">
+                    Gere imagens, videos e designs com IA para suas campanhas de marketing.
+                  </p>
+                  <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white text-sm">
+                    Acessar
+                  </Button>
+                </Card>
+              </Link>
+
+              {/* Online Store */}
+              <Link href="/online-store">
+                <Card className="bg-gradient-to-br from-slate-800 to-slate-700 border-slate-600 p-6 hover:border-green-500 transition cursor-pointer h-full">
+                  <div className="flex items-center gap-3 mb-3">
+                    <Store className="w-8 h-8 text-green-400" />
+                    <h3 className="text-xl font-bold text-white">Minha Loja Online</h3>
+                  </div>
+                  <p className="text-slate-400 text-sm mb-4">
+                    Venda produtos digitais (eBooks, cursos, templates) integrado com Kiwify.
+                  </p>
+                  <Button className="w-full bg-green-600 hover:bg-green-700 text-white text-sm">
+                    Acessar
+                  </Button>
+                </Card>
+              </Link>
+            </div>
           </div>
         )}
       </div>

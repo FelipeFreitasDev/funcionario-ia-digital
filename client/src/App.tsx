@@ -12,6 +12,8 @@ import Download from "./pages/Download";
 import Success from "./pages/Success";
 import PinterestIntegration from "./pages/PinterestIntegration";
 import EcommerceHub from "./pages/EcommerceHub";
+import CreativeStudio from "./pages/CreativeStudio";
+import OnlineStore from "./pages/OnlineStore";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -25,6 +27,8 @@ function Router() {
       <Route path="/success" component={Success} />
       <Route path="/pinterest" component={PinterestIntegration} />
       <Route path="/ecommerce" component={EcommerceHub} />
+      <Route path="/creative-studio" component={CreativeStudio} />
+      <Route path="/online-store" component={OnlineStore} />
       <Route path="/404" component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
