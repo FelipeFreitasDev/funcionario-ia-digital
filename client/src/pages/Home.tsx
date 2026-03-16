@@ -31,7 +31,7 @@ const PRICING_PLANS = [
     ],
     cta: "Começar com Starter",
     highlighted: false,
-    stripeLink: "https://buy.stripe.com/starter", // Você vai substituir com seu link real
+    stripeLink: "https://buy.stripe.com/4gM3cvd5Z30w04qfhH6Na00",
   },
   {
     name: "Professional",
@@ -51,7 +51,7 @@ const PRICING_PLANS = [
     ],
     cta: "Começar com Professional",
     highlighted: true,
-    stripeLink: "https://buy.stripe.com/professional",
+    stripeLink: "https://buy.stripe.com/3cI00j4ztdFabN82uV6Na01",
   },
   {
     name: "Enterprise",
@@ -71,7 +71,7 @@ const PRICING_PLANS = [
     ],
     cta: "Contatar para Enterprise",
     highlighted: false,
-    stripeLink: "https://buy.stripe.com/enterprise",
+    stripeLink: "https://buy.stripe.com/28EdR99TN1WseZk0mN6Na02",
   },
 ];
 
