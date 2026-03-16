@@ -273,6 +273,77 @@ export async function sendOwnerNotificationEmail(
 }
 
 /**
+ * Send confirmation email after Stripe payment
+ */
+export async function sendConfirmationEmail(
+  email: string,
+  userId: number,
+  planId: string
+): Promise<boolean> {
+  const confirmationLink = `${process.env.FRONTEND_URL || "https://funciaia-sdysrify.manus.space"}/verify-email?userId=${userId}&token=${Buffer.from(email).toString("base64")}`;
+
+  const planNames: Record<string, string> = {
+    starter: "Starter (R$ 99/mês)",
+    professional: "Professional (R$ 299/mês)",
+    enterprise: "Enterprise (Customizado)",
+  };
+
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="UTF-8">
+        <style>
+          body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+          .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+          .header { background: linear-gradient(135deg, #00d9ff, #8b5cf6); color: white; padding: 20px; border-radius: 8px; text-align: center; }
+          .content { padding: 20px; background: #f9f9f9; border-radius: 8px; margin: 20px 0; }
+          .button { display: inline-block; background: linear-gradient(135deg, #00d9ff, #8b5cf6); color: white; padding: 12px 30px; border-radius: 6px; text-decoration: none; margin: 20px 0; }
+          .footer { text-align: center; color: #666; font-size: 12px; margin-top: 20px; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1>🎉 Bem-vindo ao Funcionário Digital!</h1>
+          </div>
+          
+          <div class="content">
+            <h2>Obrigado por sua compra!</h2>
+            <p>Você adquiriu o plano <strong>${planNames[planId] || planId}</strong>.</p>
+            
+            <p>Para ativar sua conta, clique no botão abaixo para confirmar seu email:</p>
+            
+            <center>
+              <a href="${confirmationLink}" class="button">Confirmar Email</a>
+            </center>
+            
+            <h3>Próximos Passos:</h3>
+            <ol>
+              <li>Confirme seu email clicando no link acima</li>
+              <li>Crie uma senha segura para sua conta</li>
+              <li>Conecte suas plataformas (Shopee, Mercado Livre, Amazon)</li>
+              <li>Comece a automatizar seu e-commerce!</li>
+            </ol>
+          </div>
+          
+          <div class="footer">
+            <p>© 2026 Funcionário Digital. Todos os direitos reservados.</p>
+          </div>
+        </div>
+      </body>
+    </html>
+  `;
+
+  return await sendEmail({
+    to: email,
+    subject: "Confirme seu email - Funcionário Digital",
+    html,
+    text: `Bem-vindo ao Funcionário Digital! Confirme seu email clicando aqui: ${confirmationLink}`,
+  });
+}
+
+/**
  * Função genérica de envio de email
  * TODO: Implementar com Nodemailer, SendGrid, Resend ou outro serviço
  */

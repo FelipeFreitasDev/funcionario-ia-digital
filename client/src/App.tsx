@@ -22,6 +22,9 @@ import WorkerControl from "./pages/WorkerControl";
 import Onboarding from "./pages/Onboarding";
 import MultiTenantDashboard from "./pages/MultiTenantDashboard";
 import Settings from "./pages/Settings";
+import PlanConfiguration from "./pages/PlanConfiguration";
+import IntegrationSetup from "./pages/IntegrationSetup";
+import VerifyEmail from "./pages/VerifyEmail";
 
 function RouterWithNotifications() {
   const { recommendations, dismissRecommendation } = useWorker();
@@ -49,9 +52,12 @@ function RouterWithNotifications() {
         <Route path="/creative-studio-ui" component={CreativeStudioUI} />
         <Route path="/checkout-success" component={CheckoutSuccess} />
         <Route path="/online-store" component={OnlineStore} />
+            <Route path="/settings" component={Settings} />
         <Route path="/worker-control" component={WorkerControl} />
-        <Route path="/onboarding" component={Onboarding} />
         <Route path="/multi-tenant-dashboard" component={MultiTenantDashboard} />
+        <Route path="/plan-configuration" component={PlanConfiguration} />
+        <Route path="/integration-setup" component={IntegrationSetup} />
+        <Route path="/verify-email" component={VerifyEmail} />
         <Route path="/settings" component={Settings} />
         <Route path="/404" component={NotFound} />
         {/* Final fallback route */}
