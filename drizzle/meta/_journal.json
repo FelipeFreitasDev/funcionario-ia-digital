@@ -15,6 +15,13 @@
       "when": 1773531072569,
       "tag": "0001_silent_maelstrom",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1773661574907,
+      "tag": "0002_wandering_ironclad",
+      "breakpoints": true
     }
   ]
 }

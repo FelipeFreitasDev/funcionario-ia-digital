@@ -13,6 +13,7 @@ import Success from "./pages/Success";
 import PinterestIntegration from "./pages/PinterestIntegration";
 import EcommerceHub from "./pages/EcommerceHub";
 import CreativeStudio from "./pages/CreativeStudio";
+import CreativeStudioTest from "./pages/CreativeStudioTest";
 import OnlineStore from "./pages/OnlineStore";
 
 function Router() {
@@ -28,6 +29,7 @@ function Router() {
       <Route path="/ecommerce" component={EcommerceHub} />
       <Route path="/creative-studio" component={CreativeStudio} />
       <Route path="/creative-studio-ui" component={CreativeStudioUI} />
+      <Route path="/creative-studio-test" component={CreativeStudioTest} />
       <Route path="/online-store" component={OnlineStore} />
       <Route path="/404" component={NotFound} />
       {/* Final fallback route */}

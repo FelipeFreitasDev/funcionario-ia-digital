@@ -1,0 +1,22 @@
+CREATE TABLE `generations` (
+	`id` varchar(100) NOT NULL,
+	`userId` int NOT NULL,
+	`type` enum('image','video') NOT NULL,
+	`prompt` longtext NOT NULL,
+	`style` varchar(50) NOT NULL,
+	`provider` varchar(50) NOT NULL,
+	`quality` varchar(20),
+	`duration` int,
+	`width` int DEFAULT 1024,
+	`height` int DEFAULT 768,
+	`url` text,
+	`thumbnailUrl` text,
+	`status` enum('pending','processing','completed','failed') NOT NULL DEFAULT 'pending',
+	`error` text,
+	`processingTime` int,
+	`fromCache` boolean NOT NULL DEFAULT false,
+	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+	`expiresAt` timestamp,
+	CONSTRAINT `generations_id` PRIMARY KEY(`id`)
+);

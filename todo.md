@@ -87,6 +87,16 @@
 - [x] Criar 12 testes unitários para cache
 - [x] Adicionar rota /creative-studio-ui no App.tsx
 
+## ✅ FASE 3F: PERSISTÊNCIA E TESTE (IMPLEMENTADO)
+- [x] Criar tabela `generations` no banco de dados
+- [x] Criar database helpers para gerenciar histórico
+- [x] Implementar router tRPC para generations
+- [x] Criar página de teste interativa (/creative-studio-test)
+- [x] Integrar endpoints de geração com persistência
+- [x] Adicionar endpoints de lista, stats e estilos populares
+- [x] Criar 11 testes unitários para generations router
+- [x] Adicionar rota /creative-studio-test no App.tsx
+
 ## ⏳ FASE 4: CRIAÇÃO DE CRIATIVOS (LEGACY)
 - [ ] Gerador de imagens com IA
 - [ ] Gerador de vídeos com IA

@@ -1,4 +1,4 @@
-import { int, mysqlEnum, mysqlTable, text, timestamp, varchar, json, longtext } from "drizzle-orm/mysql-core";
+import { int, mysqlEnum, mysqlTable, text, timestamp, varchar, json, longtext, boolean } from "drizzle-orm/mysql-core";
 
 /**
  * Core user table backing auth flow.
@@ -86,3 +86,32 @@ export const purchases = mysqlTable("purchases", {
 
 export type Purchase = typeof purchases.$inferSelect;
 export type InsertPurchase = typeof purchases.$inferInsert;
+
+/**
+ * Image/Video Generations Table
+ * Armazena histórico de imagens e vídeos gerados pelos usuários
+ */
+export const generations = mysqlTable("generations", {
+  id: varchar("id", { length: 100 }).primaryKey(), // GEN-{timestamp}-{random}
+  userId: int("userId").notNull(),
+  type: mysqlEnum("type", ["image", "video"]).notNull(),
+  prompt: longtext("prompt").notNull(),
+  style: varchar("style", { length: 50 }).notNull(),
+  provider: varchar("provider", { length: 50 }).notNull(),
+  quality: varchar("quality", { length: 20 }),
+  duration: int("duration"), // em segundos, para vídeos
+  width: int("width").default(1024),
+  height: int("height").default(768),
+  url: text("url"), // URL da imagem/vídeo gerado
+  thumbnailUrl: text("thumbnailUrl"), // URL do thumbnail
+  status: mysqlEnum("status", ["pending", "processing", "completed", "failed"]).default("pending").notNull(),
+  error: text("error"), // Mensagem de erro se falhar
+  processingTime: int("processingTime"), // em milissegundos
+  fromCache: boolean("fromCache").default(false).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  expiresAt: timestamp("expiresAt"), // Data de expiração (para limpeza automática)
+});
+
+export type Generation = typeof generations.$inferSelect;
+export type InsertGeneration = typeof generations.$inferInsert;
