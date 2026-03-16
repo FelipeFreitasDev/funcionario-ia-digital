@@ -1,9 +1,11 @@
 import { useState, useMemo } from "react";
-import { Search, Copy, Check, ChevronDown, ChevronUp, ExternalLink, AlertCircle, CheckCircle2, Clock, Shield } from "lucide-react";
+import { Search, Copy, Check, ChevronDown, ChevronUp, ExternalLink, AlertCircle, CheckCircle2, Clock, Shield, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { DeploymentChecklist } from "@/components/DeploymentChecklist";
+import { SupportChat } from "@/components/SupportChat";
 
 interface Section {
   id: string;
@@ -576,8 +578,11 @@ pnpm db:push`}
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+      {/* Support Chat */}
+      <SupportChat />
+
       {/* Header */}
-      <div className="border-b border-slate-800 bg-slate-900/50 backdrop-blur-sm sticky top-0 z-50">
+      <div className="border-b border-slate-800 bg-slate-900/50 backdrop-blur-sm sticky top-0 z-40">
         <div className="container py-6">
           <h1 className="text-3xl font-bold text-white mb-2">📚 Guia de Implantação</h1>
           <p className="text-slate-400">Funcionário Digital de IA - Passo a passo completo para produção</p>
@@ -599,6 +604,63 @@ pnpm db:push`}
 
       {/* Main Content */}
       <div className="container pb-12">
+        {/* Video Tutorial Section */}
+        <div className="mb-12 mt-6">
+          <Card className="bg-slate-800 border-slate-700 overflow-hidden">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
+              <div className="md:col-span-2">
+                <h2 className="text-2xl font-bold text-white mb-3">🎥 Vídeo Tutorial</h2>
+                <p className="text-slate-300 mb-4">
+                  Assista um tutorial completo mostrando passo a passo como fazer deploy da sua aplicação.
+                </p>
+                <div className="relative bg-slate-900 rounded-lg overflow-hidden aspect-video">
+                  <video
+                    controls
+                    className="w-full h-full"
+                    poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Crect fill='%23334155' width='16' height='9'/%3E%3Cpath fill='%2306b6d4' d='M6 2.5L11 4.5L6 6.5Z'/%3E%3C/svg%3E"
+                  >
+                    <source src="https://webdev-static-assets.s3.us-east-1.amazonaws.com/deployment-tutorial.mp4" type="video/mp4" />
+                    Seu navegador não suporta vídeo HTML5.
+                  </video>
+                </div>
+              </div>
+              <div>
+                <h3 className="font-semibold text-cyan-400 mb-3">O que você aprenderá:</h3>
+                <ul className="space-y-2 text-sm text-slate-300">
+                  <li className="flex items-start gap-2">
+                    <Check className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
+                    Configurar variáveis de ambiente
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
+                    Registrar webhook Stripe
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
+                    Criar checkpoint
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
+                    Publicar aplicação
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <Check className="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5" />
+                    Testar fluxos
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </Card>
+        </div>
+
+        {/* Checklist Section */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold text-white mb-4">✅ Checklist Interativo</h2>
+          <DeploymentChecklist />
+        </div>
+
+        {/* Documentation Tabs */}
+        <h2 className="text-2xl font-bold text-white mb-4">📖 Documentação Completa</h2>
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 lg:grid-cols-6 bg-slate-800 border border-slate-700">
             {categories.map((cat) => (
@@ -663,7 +725,7 @@ pnpm db:push`}
       </div>
 
       {/* Footer */}
-      <div className="border-t border-slate-800 bg-slate-900/50 py-8">
+      <div className="border-t border-slate-800 bg-slate-900/50 py-8 mt-12">
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
