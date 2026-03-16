@@ -15,6 +15,8 @@ import { webhooksRouter } from "./routers/webhooks";
 import { analyticsRouter } from "./routers/analytics";
 import { schedulerRouter } from "./routers/scheduler";
 import { workerRouter } from "./routers/worker";
+import { platformsRouter } from "./routers/platforms";
+import { pushNotificationsRouter } from "./routers/push-notifications";
 
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
@@ -42,6 +44,8 @@ export const appRouter = router({
   analytics: analyticsRouter,
   scheduler: schedulerRouter,
   worker: workerRouter,
+  platforms: platformsRouter,
+  pushNotifications: pushNotificationsRouter,
 
   // TODO: add feature routers here, e.g.
   // todo: router({

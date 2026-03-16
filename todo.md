@@ -271,3 +271,37 @@
 - [x] Implementar sistema de dismiss/snooze (auto-dismiss 8s)
 - [x] Integrar hook useWorker para gerenciar recomendações
 - [x] Testar pop-ups não interrompem trabalho
+
+
+## ✅ FASE 15: INTEGRAÇÃO OAUTH COM PLATAFORMAS (IMPLEMENTADO)
+- [x] Criar serviço OAuth com suporte a 3 plataformas
+- [x] Implementar OAuth flow para Shopee
+- [x] Implementar OAuth flow para Mercado Livre
+- [x] Implementar OAuth flow para Amazon
+- [x] Criar 6 endpoints tRPC para conectar/desconectar plataformas
+- [x] Implementar refresh automático de tokens expirados
+- [x] Criar validação de tokens com expiração
+- [x] Criar 8 testes unitários para OAuth
+
+## ✅ FASE 16: PAINEL DE CONTROLE DO WORKER (IMPLEMENTADO)
+- [x] Criar página /worker-control com dashboard
+- [x] Implementar visualização de tarefas em tempo real (refetch 5s)
+- [x] Adicionar botões para pausar/reiniciar tarefas
+- [x] Criar histórico de execução de tarefas
+- [x] Implementar visualização de logs do worker
+- [x] Adicionar 4 KPI cards (status, tarefas, recomendações, uptime)
+- [x] Criar filtros de tarefas (ativa, aguardando)
+- [x] Implementar export de logs em JSON
+- [x] Testar responsividade em mobile
+
+## ✅ FASE 17: NOTIFICAÇÕES PUSH (DESKTOP/MOBILE) (IMPLEMENTADO)
+- [x] Criar serviço de Push Notifications com gerenciador
+- [x] Implementar endpoints tRPC para subscribe/unsubscribe
+- [x] Implementar notificações de novo pedido
+- [x] Implementar notificações de publicação concluída
+- [x] Implementar notificações de alerta de estoque
+- [x] Implementar notificações de erro de sincronização
+- [x] Criar templates de notificações (6 tipos)
+- [x] Implementar limpeza de inscrições expiradas (90 dias)
+- [x] Criar 9 testes unitários para push notifications
+- [x] Criar gerenciador de inscrições com Map<userId, subscriptions>

@@ -19,6 +19,7 @@ import EcommerceHub from "./pages/EcommerceHub";
 import CreativeStudio from "./pages/CreativeStudio";
 import CreativeStudioTest from "./pages/CreativeStudioTest";
 import OnlineStore from "./pages/OnlineStore";
+import WorkerControl from "./pages/WorkerControl";
 
 function RouterWithNotifications() {
   const { recommendations, dismissRecommendation } = useWorker();
@@ -46,6 +47,7 @@ function RouterWithNotifications() {
         <Route path="/analytics" component={AnalyticsDashboard} />
         <Route path="/creative-studio-test" component={CreativeStudioTest} />
         <Route path="/online-store" component={OnlineStore} />
+        <Route path="/worker-control" component={WorkerControl} />
         <Route path="/404" component={NotFound} />
         {/* Final fallback route */}
         <Route component={NotFound} />
