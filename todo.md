@@ -179,3 +179,38 @@
 - [x] Adicionar UI para seleção de gerações
 - [x] Gerar ZIP com metadados
 - [x] Testar download de múltiplas imagens
+
+
+## ✅ FASE 7: WEBHOOKS DE PLATAFORMAS (IMPLEMENTADO)
+- [x] Criar tabela `webhooks` para armazenar eventos
+- [x] Implementar endpoint POST para receber webhooks
+- [x] Criar handlers para eventos de Shopee (novo pedido, mudança status)
+- [x] Criar handlers para eventos de Mercado Livre (novo pedido, mudança status)
+- [x] Criar handlers para eventos de Amazon (novo pedido, mudança status)
+- [x] Implementar verificação de assinatura de webhook
+- [x] Adicionar retry automático para webhooks falhados
+- [x] Criar 9 endpoints tRPC para gerenciar webhooks
+- [x] Criar 10 testes unitários para webhooks
+
+## ✅ FASE 8: DASHBOARD DE ANALYTICS (IMPLEMENTADO)
+- [x] Criar tabela `analytics` para armazenar métricas
+- [x] Implementar coleta de dados de vendas por plataforma
+- [x] Criar funções para gráficos de vendas
+- [x] Criar funções para gerações mais populares
+- [x] Criar funções para estilos mais usados
+- [x] Implementar cálculo de ROI por plataforma
+- [x] Criar 8 endpoints tRPC para analytics
+- [x] Adicionar filtros de período (dia, semana, mês, ano)
+- [x] Implementar exportação de relatórios em CSV/PDF
+- [x] Criar 13 testes unitários para analytics
+
+## ✅ FASE 9: AGENDAMENTO DE PUBLICAÇÕES (IMPLEMENTADO)
+- [x] Criar tabela `scheduled_posts` no banco
+- [x] Implementar scheduler com validação de horários
+- [x] Criar 10 endpoints tRPC para agendamento
+- [x] Implementar seleção de múltiplas plataformas (6 plataformas)
+- [x] Adicionar preview de publicação antes de agendar
+- [x] Implementar publicação imediata em múltiplas plataformas
+- [x] Implementar edição de publicações agendadas
+- [x] Adicionar cancelamento de publicações agendadas
+- [x] Criar 11 testes unitários para scheduler
