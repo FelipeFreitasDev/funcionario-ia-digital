@@ -14,6 +14,7 @@ import { batchDownloadRouter } from "./routers/batch-download";
 import { webhooksRouter } from "./routers/webhooks";
 import { analyticsRouter } from "./routers/analytics";
 import { schedulerRouter } from "./routers/scheduler";
+import { workerRouter } from "./routers/worker";
 
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
@@ -40,6 +41,7 @@ export const appRouter = router({
   webhooks: webhooksRouter,
   analytics: analyticsRouter,
   scheduler: schedulerRouter,
+  worker: workerRouter,
 
   // TODO: add feature routers here, e.g.
   // todo: router({
