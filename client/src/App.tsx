@@ -20,6 +20,8 @@ import CreativeStudio from "./pages/CreativeStudio";
 import CreativeStudioTest from "./pages/CreativeStudioTest";
 import OnlineStore from "./pages/OnlineStore";
 import WorkerControl from "./pages/WorkerControl";
+import Onboarding from "./pages/Onboarding";
+import MultiTenantDashboard from "./pages/MultiTenantDashboard";
 
 function RouterWithNotifications() {
   const { recommendations, dismissRecommendation } = useWorker();
@@ -48,6 +50,8 @@ function RouterWithNotifications() {
         <Route path="/creative-studio-test" component={CreativeStudioTest} />
         <Route path="/online-store" component={OnlineStore} />
         <Route path="/worker-control" component={WorkerControl} />
+        <Route path="/onboarding" component={Onboarding} />
+        <Route path="/multi-tenant-dashboard" component={MultiTenantDashboard} />
         <Route path="/404" component={NotFound} />
         {/* Final fallback route */}
         <Route component={NotFound} />
