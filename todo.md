@@ -151,3 +151,31 @@
 - [ ] FAQ expandido
 - [ ] Sistema de suporte integrado
 - [ ] Comunidade de usuários
+
+
+## ✅ FASE 4: FILA DE PROCESSAMENTO COM BULL QUEUE (IMPLEMENTADO)
+- [x] Instalar Bull Queue e dependências
+- [x] Criar worker para processar gerações
+- [x] Configurar fila com retry automático (3 tentativas)
+- [x] Implementar WebSocket para notificações
+- [x] Integrar fila ao router de gerações
+- [x] Adicionar status de fila no histórico
+- [x] Testar com requisições longas
+
+## ✅ FASE 5: SISTEMA DE FAVORITOS (IMPLEMENTADO)
+- [x] Criar tabela `favorites` no banco
+- [x] Adicionar database helpers para favoritos
+- [x] Criar router tRPC para favoritos
+- [x] Implementar UI para marcar como favorito
+- [x] Adicionar filtro por favoritos no histórico
+- [x] Criar página de favoritos
+- [x] Implementar compartilhamento via link público
+- [x] Testar fluxo completo
+
+## ✅ FASE 6: DOWNLOAD EM BATCH (IMPLEMENTADO)
+- [x] Instalar archiver para gerar ZIP
+- [x] Criar endpoint para download em batch
+- [x] Implementar filtros (data, estilo, tipo)
+- [x] Adicionar UI para seleção de gerações
+- [x] Gerar ZIP com metadados
+- [x] Testar download de múltiplas imagens

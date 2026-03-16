@@ -1,0 +1,9 @@
+{
+  "query": "CREATE TABLE IF NOT EXISTS `favorites` (\n  `id` varchar(100) NOT NULL,\n  `userId` int NOT NULL,\n  `generationId` varchar(100) NOT NULL,\n  `collectionName` varchar(255),\n  `isPublic` tinyint(1) NOT NULL DEFAULT 0,\n  `publicToken` varchar(255) UNIQUE,\n  `expiresAt` timestamp NULL,\n  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  PRIMARY KEY (`id`),\n  KEY `userId_idx` (`userId`),\n  KEY `generationId_idx` (`generationId`),\n  KEY `publicToken_idx` (`publicToken`),\n  UNIQUE KEY `user_generation_idx` (`userId`, `generationId`)\n);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway04.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3r28WzGBz4r7WSC.root --database SdYSRiFyv5LnWNYthZFfV8 --execute CREATE TABLE IF NOT EXISTS `favorites` (\n  `id` varchar(100) NOT NULL,\n  `userId` int NOT NULL,\n  `generationId` varchar(100) NOT NULL,\n  `collectionName` varchar(255),\n  `isPublic` tinyint(1) NOT NULL DEFAULT 0,\n  `publicToken` varchar(255) UNIQUE,\n  `expiresAt` timestamp NULL,\n  `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\n  `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n  PRIMARY KEY (`id`),\n  KEY `userId_idx` (`userId`),\n  KEY `generationId_idx` (`generationId`),\n  KEY `publicToken_idx` (`publicToken`),\n  UNIQUE KEY `user_generation_idx` (`userId`, `generationId`)\n);",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 660
+}

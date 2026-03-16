@@ -9,6 +9,8 @@ import { accountsRouter } from "./routers/accounts";
 import { ecommerceRouter } from "./routers/ecommerce";
 import { creativeRouter } from "./routers/creative";
 import { generationsRouter } from "./routers/generations";
+import { favoritesRouter } from "./routers/favorites";
+import { batchDownloadRouter } from "./routers/batch-download";
 
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
@@ -30,6 +32,8 @@ export const appRouter = router({
   ecommerce: ecommerceRouter,
   creative: creativeRouter,
   generations: generationsRouter,
+  favorites: favoritesRouter,
+  batchDownload: batchDownloadRouter,
 
   // TODO: add feature routers here, e.g.
   // todo: router({
