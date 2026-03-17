@@ -28,6 +28,7 @@ import IntegrationSetup from "./pages/IntegrationSetup";
 import VerifyEmail from "./pages/VerifyEmail";
 import DeploymentGuide from "./pages/DeploymentGuide";
 import SubscriptionPlans from "./pages/SubscriptionPlans";
+import SubscriptionManagement from "./pages/SubscriptionManagement";
 
 function RouterWithNotifications() {
   const { recommendations, dismissRecommendation } = useWorker();
@@ -67,6 +68,7 @@ function RouterWithNotifications() {
         <Route path="/verify-email" component={VerifyEmail} />
         <Route path="/deployment-guide" component={DeploymentGuide} />
         <Route path="/subscription-plans" component={SubscriptionPlans} />
+        <Route path="/subscription-management" component={SubscriptionManagement} />
         <Route path="/404" component={NotFound} />
         {/* Final fallback route */}
         <Route component={NotFound} />
