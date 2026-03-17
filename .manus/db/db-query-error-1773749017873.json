@@ -1,0 +1,8 @@
+{
+  "query": "ALTER TABLE users ADD COLUMN IF NOT EXISTS stripeCustomerId VARCHAR(255) UNIQUE; ALTER TABLE users ADD COLUMN IF NOT EXISTS subscriptionStatus ENUM('inactive', 'active', 'canceled', 'past_due') DEFAULT 'inactive'; ALTER TABLE users ADD COLUMN IF NOT EXISTS currentPlanId VARCHAR(50); ALTER TABLE users ADD COLUMN IF NOT EXISTS subscriptionStartDate TIMESTAMP NULL; ALTER TABLE users ADD COLUMN IF NOT EXISTS subscriptionEndDate TIMESTAMP NULL; ALTER TABLE users ADD COLUMN IF NOT EXISTS lastPaymentDate TIMESTAMP NULL; ALTER TABLE users ADD COLUMN IF NOT EXISTS nextBillingDate TIMESTAMP NULL;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway04.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3r28WzGBz4r7WSC.root --database SdYSRiFyv5LnWNYthZFfV8 --execute ALTER TABLE users ADD COLUMN IF NOT EXISTS stripeCustomerId VARCHAR(255) UNIQUE; ALTER TABLE users ADD COLUMN IF NOT EXISTS subscriptionStatus ENUM('inactive', 'active', 'canceled', 'past_due') DEFAULT 'inactive'; ALTER TABLE users ADD COLUMN IF NOT EXISTS currentPlanId VARCHAR(50); ALTER TABLE users ADD COLUMN IF NOT EXISTS subscriptionStartDate TIMESTAMP NULL; ALTER TABLE users ADD COLUMN IF NOT EXISTS subscriptionEndDate TIMESTAMP NULL; ALTER TABLE users ADD COLUMN IF NOT EXISTS lastPaymentDate TIMESTAMP NULL; ALTER TABLE users ADD COLUMN IF NOT EXISTS nextBillingDate TIMESTAMP NULL;",
+  "returncode": 1,
+  "logs": [
+    "ERROR 8200 (HY000) at line 1: unsupported add column 'stripecustomerid' constraint UNIQUE KEY when altering 'SdYSRiFyv5LnWNYthZFfV8.users'"
+  ]
+}

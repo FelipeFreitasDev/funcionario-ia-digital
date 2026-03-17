@@ -1,0 +1,9 @@
+{
+  "query": "ALTER TABLE users ADD COLUMN IF NOT EXISTS stripeCustomerId VARCHAR(255); ALTER TABLE users ADD COLUMN IF NOT EXISTS subscriptionStatus VARCHAR(50) DEFAULT 'inactive'; ALTER TABLE users ADD COLUMN IF NOT EXISTS currentPlanId VARCHAR(50); ALTER TABLE users ADD COLUMN IF NOT EXISTS subscriptionStartDate TIMESTAMP NULL; ALTER TABLE users ADD COLUMN IF NOT EXISTS subscriptionEndDate TIMESTAMP NULL; ALTER TABLE users ADD COLUMN IF NOT EXISTS lastPaymentDate TIMESTAMP NULL; ALTER TABLE users ADD COLUMN IF NOT EXISTS nextBillingDate TIMESTAMP NULL;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway04.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3r28WzGBz4r7WSC.root --database SdYSRiFyv5LnWNYthZFfV8 --execute ALTER TABLE users ADD COLUMN IF NOT EXISTS stripeCustomerId VARCHAR(255); ALTER TABLE users ADD COLUMN IF NOT EXISTS subscriptionStatus VARCHAR(50) DEFAULT 'inactive'; ALTER TABLE users ADD COLUMN IF NOT EXISTS currentPlanId VARCHAR(50); ALTER TABLE users ADD COLUMN IF NOT EXISTS subscriptionStartDate TIMESTAMP NULL; ALTER TABLE users ADD COLUMN IF NOT EXISTS subscriptionEndDate TIMESTAMP NULL; ALTER TABLE users ADD COLUMN IF NOT EXISTS lastPaymentDate TIMESTAMP NULL; ALTER TABLE users ADD COLUMN IF NOT EXISTS nextBillingDate TIMESTAMP NULL;",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 1388
+}

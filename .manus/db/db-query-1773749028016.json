@@ -1,0 +1,9 @@
+{
+  "query": "INSERT INTO users (openId, name, email, loginMethod, role, stripeCustomerId, subscriptionStatus, currentPlanId, subscriptionStartDate, subscriptionEndDate, lastPaymentDate, nextBillingDate, createdAt, updatedAt, lastSignedIn) VALUES ('test-user-enterprise', 'Proprietário Teste', 'proprietario@funcionariodigital.com', 'oauth', 'admin', 'cus_test_enterprise', 'active', 'enterprise', NOW(), DATE_ADD(NOW(), INTERVAL 30 DAY), NOW(), DATE_ADD(NOW(), INTERVAL 30 DAY), NOW(), NOW(), NOW()) ON DUPLICATE KEY UPDATE role = 'admin', subscriptionStatus = 'active', currentPlanId = 'enterprise';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway04.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3r28WzGBz4r7WSC.root --database SdYSRiFyv5LnWNYthZFfV8 --execute INSERT INTO users (openId, name, email, loginMethod, role, stripeCustomerId, subscriptionStatus, currentPlanId, subscriptionStartDate, subscriptionEndDate, lastPaymentDate, nextBillingDate, createdAt, updatedAt, lastSignedIn) VALUES ('test-user-enterprise', 'Proprietário Teste', 'proprietario@funcionariodigital.com', 'oauth', 'admin', 'cus_test_enterprise', 'active', 'enterprise', NOW(), DATE_ADD(NOW(), INTERVAL 30 DAY), NOW(), DATE_ADD(NOW(), INTERVAL 30 DAY), NOW(), NOW(), NOW()) ON DUPLICATE KEY UPDATE role = 'admin', subscriptionStatus = 'active', currentPlanId = 'enterprise';",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 70
+}

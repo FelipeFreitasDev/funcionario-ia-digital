@@ -1,0 +1,8 @@
+{
+  "query": "\nDELETE FROM users WHERE email = 'olimpoinformatica2016@gmail.com';\n\nINSERT INTO users (\n  id,\n  email,\n  name,\n  role,\n  subscriptionStatus,\n  currentPlanId,\n  subscriptionStartDate,\n  subscriptionEndDate,\n  stripeCustomerId,\n  createdAt,\n  updatedAt\n) VALUES (\n  'super_user_001',\n  'olimpoinformatica2016@gmail.com',\n  'Super User Olimpo',\n  'admin',\n  'active',\n  'enterprise',\n  NOW(),\n  DATE_ADD(NOW(), INTERVAL 1 YEAR),\n  'cus_super_enterprise',\n  NOW(),\n  NOW()\n);\n",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway04.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3r28WzGBz4r7WSC.root --database SdYSRiFyv5LnWNYthZFfV8 --execute \nDELETE FROM users WHERE email = 'olimpoinformatica2016@gmail.com';\n\nINSERT INTO users (\n  id,\n  email,\n  name,\n  role,\n  subscriptionStatus,\n  currentPlanId,\n  subscriptionStartDate,\n  subscriptionEndDate,\n  stripeCustomerId,\n  createdAt,\n  updatedAt\n) VALUES (\n  'super_user_001',\n  'olimpoinformatica2016@gmail.com',\n  'Super User Olimpo',\n  'admin',\n  'active',\n  'enterprise',\n  NOW(),\n  DATE_ADD(NOW(), INTERVAL 1 YEAR),\n  'cus_super_enterprise',\n  NOW(),\n  NOW()\n);\n",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1366 (HY000) at line 4: Incorrect ? value: '?' for column 'id' at row 1"
+  ]
+}
