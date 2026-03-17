@@ -18,7 +18,6 @@ import { workerRouter } from "./routers/worker";
 import { platformsRouter } from "./routers/platforms";
 import { pushNotificationsRouter } from "./routers/push-notifications";
 import { settingsRouter } from "./routers/settings";
-import { emailRouter } from "./routers/email";
 
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
@@ -49,7 +48,6 @@ export const appRouter = router({
   platforms: platformsRouter,
   pushNotifications: pushNotificationsRouter,
   settings: settingsRouter,
-  email: emailRouter,
 
   // TODO: add feature routers here, e.g.
   // todo: router({

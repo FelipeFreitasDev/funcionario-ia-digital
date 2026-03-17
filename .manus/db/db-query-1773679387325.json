@@ -1,9 +1,0 @@
-{
-  "query": "CREATE TABLE IF NOT EXISTS `subscriptions` (\n\t`id` varchar(100) NOT NULL,\n\t`userId` int NOT NULL,\n\t`stripeSubscriptionId` varchar(255),\n\t`planId` varchar(50) NOT NULL,\n\t`status` enum('active','canceled','past_due','unpaid') NOT NULL DEFAULT 'active',\n\t`amount` int NOT NULL,\n\t`currency` varchar(3) NOT NULL DEFAULT 'BRL',\n\t`billingCycle` enum('monthly','annual') NOT NULL DEFAULT 'monthly',\n\t`startDate` timestamp NOT NULL,\n\t`endDate` timestamp,\n\t`canceledAt` timestamp,\n\t`cancelReason` text,\n\t`nextBillingDate` timestamp,\n\t`createdAt` timestamp NOT NULL DEFAULT (now()),\n\t`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,\n\tCONSTRAINT `subscriptions_id` PRIMARY KEY(`id`),\n\tCONSTRAINT `subscriptions_stripeSubscriptionId_unique` UNIQUE(`stripeSubscriptionId`)\n);",
-  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway04.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3r28WzGBz4r7WSC.root --database SdYSRiFyv5LnWNYthZFfV8 --execute CREATE TABLE IF NOT EXISTS `subscriptions` (\n\t`id` varchar(100) NOT NULL,\n\t`userId` int NOT NULL,\n\t`stripeSubscriptionId` varchar(255),\n\t`planId` varchar(50) NOT NULL,\n\t`status` enum('active','canceled','past_due','unpaid') NOT NULL DEFAULT 'active',\n\t`amount` int NOT NULL,\n\t`currency` varchar(3) NOT NULL DEFAULT 'BRL',\n\t`billingCycle` enum('monthly','annual') NOT NULL DEFAULT 'monthly',\n\t`startDate` timestamp NOT NULL,\n\t`endDate` timestamp,\n\t`canceledAt` timestamp,\n\t`cancelReason` text,\n\t`nextBillingDate` timestamp,\n\t`createdAt` timestamp NOT NULL DEFAULT (now()),\n\t`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,\n\tCONSTRAINT `subscriptions_id` PRIMARY KEY(`id`),\n\tCONSTRAINT `subscriptions_stripeSubscriptionId_unique` UNIQUE(`stripeSubscriptionId`)\n);",
-  "rows": [],
-  "messages": [],
-  "stdout": "",
-  "stderr": "",
-  "execution_time_ms": 56
-}

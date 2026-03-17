@@ -17,14 +17,6 @@ export const users = mysqlTable("users", {
   email: varchar("email", { length: 320 }),
   loginMethod: varchar("loginMethod", { length: 64 }),
   role: mysqlEnum("role", ["user", "admin"]).default("user").notNull(),
-  // Subscription fields
-  stripeCustomerId: varchar("stripeCustomerId", { length: 255 }).unique(),
-  subscriptionStatus: mysqlEnum("subscriptionStatus", ["inactive", "active", "canceled", "past_due"]).default("inactive").notNull(),
-  currentPlanId: varchar("currentPlanId", { length: 50 }),
-  subscriptionStartDate: timestamp("subscriptionStartDate"),
-  subscriptionEndDate: timestamp("subscriptionEndDate"),
-  lastPaymentDate: timestamp("lastPaymentDate"),
-  nextBillingDate: timestamp("nextBillingDate"),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
   lastSignedIn: timestamp("lastSignedIn").defaultNow().notNull(),
@@ -123,28 +115,3 @@ export const generations = mysqlTable("generations", {
 
 export type Generation = typeof generations.$inferSelect;
 export type InsertGeneration = typeof generations.$inferInsert;
-
-/**
- * Subscriptions Table
- * Armazena histórico de assinaturas dos usuários
- */
-export const subscriptions = mysqlTable("subscriptions", {
-  id: varchar("id", { length: 100 }).primaryKey(),
-  userId: int("userId").notNull(),
-  stripeSubscriptionId: varchar("stripeSubscriptionId", { length: 255 }).unique(),
-  planId: varchar("planId", { length: 50 }).notNull(),
-  status: mysqlEnum("status", ["active", "canceled", "past_due", "unpaid"]).default("active").notNull(),
-  amount: int("amount").notNull(),
-  currency: varchar("currency", { length: 3 }).default("BRL").notNull(),
-  billingCycle: mysqlEnum("billingCycle", ["monthly", "annual"]).default("monthly").notNull(),
-  startDate: timestamp("startDate").notNull(),
-  endDate: timestamp("endDate"),
-  canceledAt: timestamp("canceledAt"),
-  cancelReason: text("cancelReason"),
-  nextBillingDate: timestamp("nextBillingDate"),
-  createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
-});
-
-export type Subscription = typeof subscriptions.$inferSelect;
-export type InsertSubscription = typeof subscriptions.$inferInsert;

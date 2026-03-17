@@ -9,7 +9,6 @@ import { RecommendationNotificationQueue } from "@/components/RecommendationNoti
 import Home from "./pages/Home";
 import AnalyticsDashboard from "@/pages/AnalyticsDashboard";
 import Dashboard from "./pages/Dashboard";
-import { ProtectedRoute } from "./components/ProtectedRoute";
 import Checkout from "./pages/Checkout";
 import Download from "./pages/Download";
 import Success from "./pages/Success";
@@ -27,8 +26,6 @@ import PlanConfiguration from "./pages/PlanConfiguration";
 import IntegrationSetup from "./pages/IntegrationSetup";
 import VerifyEmail from "./pages/VerifyEmail";
 import DeploymentGuide from "./pages/DeploymentGuide";
-import SubscriptionPlans from "./pages/SubscriptionPlans";
-import SubscriptionManagement from "./pages/SubscriptionManagement";
 
 function RouterWithNotifications() {
   const { recommendations, dismissRecommendation } = useWorker();
@@ -45,11 +42,7 @@ function RouterWithNotifications() {
     <>
       <Switch>
         <Route path="/" component={Home} />
-        <Route path="/dashboard">
-          <ProtectedRoute requirePayment={true}>
-            <Dashboard />
-          </ProtectedRoute>
-        </Route>
+        <Route path="/dashboard" component={Dashboard} />
         <Route path="/checkout" component={Checkout} />
         <Route path="/download" component={Download} />
         <Route path="/success" component={Success} />
@@ -67,8 +60,6 @@ function RouterWithNotifications() {
         <Route path="/integration-setup" component={IntegrationSetup} />
         <Route path="/verify-email" component={VerifyEmail} />
         <Route path="/deployment-guide" component={DeploymentGuide} />
-        <Route path="/subscription-plans" component={SubscriptionPlans} />
-        <Route path="/subscription-management" component={SubscriptionManagement} />
         <Route path="/404" component={NotFound} />
         {/* Final fallback route */}
         <Route component={NotFound} />

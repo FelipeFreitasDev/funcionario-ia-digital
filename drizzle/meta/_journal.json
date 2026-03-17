@@ -22,13 +22,6 @@
       "when": 1773661574907,
       "tag": "0002_wandering_ironclad",
       "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "5",
-      "when": 1773679365229,
-      "tag": "0003_handy_network",
-      "breakpoints": true
     }
   ]
 }
