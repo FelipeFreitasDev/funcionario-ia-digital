@@ -2,22 +2,6 @@ import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
-import { supportRouter } from "./routers/support";
-import { downloadsRouter } from "./routers/downloads";
-import { socialAuthRouter } from "./routers/socialAuth";
-import { accountsRouter } from "./routers/accounts";
-import { ecommerceRouter } from "./routers/ecommerce";
-import { creativeRouter } from "./routers/creative";
-import { generationsRouter } from "./routers/generations";
-import { favoritesRouter } from "./routers/favorites";
-import { batchDownloadRouter } from "./routers/batch-download";
-import { webhooksRouter } from "./routers/webhooks";
-import { analyticsRouter } from "./routers/analytics";
-import { schedulerRouter } from "./routers/scheduler";
-import { workerRouter } from "./routers/worker";
-import { platformsRouter } from "./routers/platforms";
-import { pushNotificationsRouter } from "./routers/push-notifications";
-import { settingsRouter } from "./routers/settings";
 
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
@@ -32,22 +16,6 @@ export const appRouter = router({
       } as const;
     }),
   }),
-  support: supportRouter,
-  downloads: downloadsRouter,
-  socialAuth: socialAuthRouter,
-  accounts: accountsRouter,
-  ecommerce: ecommerceRouter,
-  creative: creativeRouter,
-  generations: generationsRouter,
-  favorites: favoritesRouter,
-  batchDownload: batchDownloadRouter,
-  webhooks: webhooksRouter,
-  analytics: analyticsRouter,
-  scheduler: schedulerRouter,
-  worker: workerRouter,
-  platforms: platformsRouter,
-  pushNotifications: pushNotificationsRouter,
-  settings: settingsRouter,
 
   // TODO: add feature routers here, e.g.
   // todo: router({

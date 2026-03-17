@@ -1,41 +1,5 @@
 {
   "version": "7",
   "dialect": "mysql",
-  "entries": [
-    {
-      "idx": 0,
-      "version": "5",
-      "when": 1773530926158,
-      "tag": "0000_magenta_tony_stark",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1773531072569,
-      "tag": "0001_silent_maelstrom",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1773661574907,
-      "tag": "0002_wandering_ironclad",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "5",
-      "when": 1773679365229,
-      "tag": "0003_handy_network",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "5",
-      "when": 1773748262772,
-      "tag": "0004_charming_purifiers",
-      "breakpoints": true
-    }
-  ]
+  "entries": []
 }
